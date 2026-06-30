@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>かおり式 ボディメイク管理</title>
+  <!-- PWA -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="かおり式ボディメイク">
+  <meta name="theme-color" content="#2C2418">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%232C2418'/%3E%3Ctext y='.9em' font-size='80' x='10'%3E%F0%9F%8C%BF%3C/text%3E%3C/svg%3E">
+  <!-- Googleフォント：非同期読み込み（表示をブロックしない） -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Playfair+Display:ital@1&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Playfair+Display:ital@1&display=swap"></noscript>
+  <style>
+    :root{
+      --cr:#FAF7F2;--ac:#C4956A;--al:#E8D5C0;--dk:#2C2418;--md:#7A6A58;
+      --ok:#6B9E6E;--okl:#E8F5E9;--bd:#E0D5C8;--bl:#4A90E2;--bll:#E8F4F8;
+      --wn:#FEF3C7;--wb:#F59E0B;--er:#FEE2E2;--eb:#EF4444;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    html{width:100%;max-width:100vw;overflow-x:hidden;}
+    html,body{width:100%;max-width:100vw;font-family:'Noto Sans JP',sans-serif;background:var(--cr);color:var(--dk);overflow-x:hidden;}
+    *{max-width:100%;}
+    .cg,.mg3,.mg4,.sg,.sg3{max-width:100vw;}
+    body{padding-bottom:72px;}
+    header{background:var(--dk);color:var(--cr);padding:10px 20px;text-align:center;position:sticky;top:0;z-index:50;}
+    header .logo{font-family:'Playfair Display',serif;font-style:italic;font-size:10px;color:var(--ac);letter-spacing:2px;margin-bottom:2px;}
+    header h1{font-size:15px;font-weight:700;}
+    .screen{display:none;padding:18px;animation:fi .25s ease;}
+    .screen.active{display:block;}
+    @keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+    .stitle{font-size:19px;font-weight:700;margin-bottom:5px;}
+    .ssub{font-size:13px;color:var(--md);margin-bottom:14px;line-height:1.5;}
+    /* フォーム */
+    .fg{margin-bottom:14px;}
+    label{display:block;font-size:13px;font-weight:600;color:var(--md);margin-bottom:6px;}
+    input[type=number],input[type=date]{width:100%;max-width:100%;padding:11px 12px;border:1.5px solid var(--bd);border-radius:10px;font-size:14px;font-family:inherit;background:#fff;color:var(--dk);box-sizing:border-box;-webkit-appearance:none;appearance:none;display:block;}
+    input[type=number]:focus{outline:none;border-color:var(--ac);}
+    .iu{position:relative;}
+    .iu input{padding-right:48px;}
+    .iu span{position:absolute;right:13px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--md);pointer-events:none;}
+    .rg{display:flex;gap:7px;flex-wrap:wrap;}
+    .rb{flex:1;min-width:55px;}
+    .rb input{display:none;}
+    .rb label{display:block;text-align:center;padding:9px 5px;border:1.5px solid var(--bd);border-radius:9px;background:#fff;cursor:pointer;font-size:11px;font-weight:500;line-height:1.4;transition:all .15s;}
+    .rb input:checked+label{border-color:var(--ac);background:var(--al);font-weight:700;}
+    /* ボタン */
+    .btn{padding:13px 18px;border:none;border-radius:10px;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;display:block;width:100%;margin-top:10px;}
+    .btn-p{background:var(--dk);color:var(--cr);}
+    .btn-p:active{transform:scale(.98);}
+    .btn-s{background:transparent;color:var(--md);border:1.5px solid var(--bd);}
+    .btn-d{background:transparent;color:var(--eb);border:1.5px solid var(--eb);}
+    .btn-sm{padding:7px 13px;font-size:12px;width:auto;margin-top:0;}
+    /* カード */
+    .card{background:#fff;border-radius:13px;padding:14px;margin-bottom:13px;border-left:4px solid var(--ac);box-shadow:0 2px 6px rgba(0,0,0,.05);}
+    .card h3{font-size:13px;font-weight:700;margin-bottom:11px;}
+    /* 黒背景カード */
+    .ndc{background:var(--dk);border-radius:13px;padding:16px;margin-bottom:13px;}
+    .ndl{font-size:10px;color:rgba(250,247,242,.5);letter-spacing:.8px;margin-bottom:3px;}
+    .ndv{font-size:36px;font-weight:700;color:var(--cr);line-height:1;}
+    .ndu{font-size:13px;color:rgba(250,247,242,.7);}
+    .nds{font-size:11px;color:rgba(250,247,242,.4);margin-top:3px;margin-bottom:11px;}
+    .ndiv{height:1px;background:rgba(255,255,255,.1);margin:10px 0;}
+    .mg3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px;}
+    .ndmc{text-align:center;}
+    .ndmc .mv{font-size:20px;font-weight:700;color:var(--cr);}
+    .ndmc .mv span{font-size:11px;font-weight:400;}
+    .ndmc .ml{font-size:10px;color:rgba(250,247,242,.45);margin-top:2px;}
+    .ndmc .mk{font-size:9px;color:rgba(250,247,242,.32);}
+    .mg4{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;}
+    .mmi{background:rgba(255,255,255,.07);border-radius:7px;padding:7px 3px;text-align:center;}
+    .mmi .mmv{font-size:12px;font-weight:700;color:var(--al);}
+    .mmi .mml{font-size:9px;color:rgba(250,247,242,.4);margin-top:1px;}
+    /* stat */
+    .sg{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-bottom:9px;}
+    .sg3{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:9px;}
+    @media(min-width:400px){.sg{grid-template-columns:repeat(3,1fr);}}
+    .sb{background:var(--bll);padding:10px 11px;border-radius:9px;border-left:3px solid var(--bl);}
+    .sb.ac{background:linear-gradient(135deg,#FDF8F4,var(--al));border-left-color:var(--ac);}
+    .sb.gr{background:var(--okl);border-left-color:var(--ok);}
+    .sl2{font-size:10px;color:var(--md);margin-bottom:3px;letter-spacing:.3px;}
+    .sv{font-size:19px;font-weight:700;}
+    .sv.gn{color:var(--ok);}
+    .sv.acc{color:var(--ac);}
+    .pw{background:var(--bd);border-radius:5px;height:9px;overflow:hidden;margin-top:5px;}
+    .pb{height:100%;border-radius:5px;background:var(--ok);}
+    /* 食事 */
+    .mi{background:var(--cr);border-radius:9px;padding:10px 11px;margin-bottom:5px;border-left:4px solid var(--ok);display:flex;justify-content:space-between;align-items:center;gap:8px;cursor:pointer;}
+    .mi:hover{background:var(--al);}
+    .mn{flex:1;font-size:13px;font-weight:500;line-height:1.4;}
+    .mr2{display:flex;align-items:center;gap:5px;flex-shrink:0;}
+    .mc2{font-size:11px;font-weight:700;background:var(--okl);color:var(--ok);padding:3px 7px;border-radius:5px;white-space:nowrap;}
+    .dt{background:var(--dk);color:var(--cr);border-radius:7px;padding:9px 13px;margin-top:7px;font-size:13px;display:flex;justify-content:space-between;align-items:center;}
+    .dd{font-size:10px;opacity:.7;}
+    .msh{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px;}
+    .mst{font-size:13px;font-weight:700;}
+    .mstg{font-size:11px;color:var(--md);}
+    /* タブ */
+    .tn{display:flex;gap:5px;overflow-x:auto;padding-bottom:10px;margin-bottom:10px;scrollbar-width:none;}
+    .tn::-webkit-scrollbar{display:none;}
+    .tb{flex-shrink:0;padding:7px 15px;border-radius:18px;font-size:12px;font-weight:600;border:1.5px solid var(--bd);background:#fff;color:var(--md);cursor:pointer;font-family:inherit;transition:all .15s;}
+    .tb.active{background:var(--dk);color:var(--cr);border-color:var(--dk);}
+    .tb.today-tab{border-color:var(--ac);color:var(--ac);}
+    .tb.today-tab.active{background:var(--ac);color:#fff;border-color:var(--ac);}
+    /* ボックス */
+    .wb2{background:var(--wn);border-left:4px solid var(--wb);border-radius:7px;padding:10px 12px;margin-bottom:9px;font-size:12px;color:#92400E;line-height:1.5;}
+    .eb2{background:var(--er);border-left:4px solid var(--eb);border-radius:7px;padding:10px 12px;margin-bottom:9px;font-size:12px;color:#991B1B;line-height:1.5;}
+    .ib{background:var(--okl);border-left:4px solid var(--ok);border-radius:7px;padding:10px 12px;margin-bottom:9px;font-size:12px;color:#166534;line-height:1.5;}
+    .tp{background:var(--bll);border-left:4px solid var(--bl);border-radius:7px;padding:10px 12px;margin-bottom:9px;font-size:12px;color:#1e3a5f;line-height:1.5;}
+    /* カレンダー */
+    .cmn{display:flex;justify-content:space-between;align-items:center;margin-bottom:11px;}
+    .cmn button{background:none;border:1.5px solid var(--bd);border-radius:7px;padding:5px 11px;font-family:inherit;font-size:13px;cursor:pointer;color:var(--md);}
+    .cml{font-size:15px;font-weight:700;}
+    .cg{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:13px;}
+    .cd2{font-size:10px;font-weight:700;text-align:center;color:var(--md);padding:3px;}
+    .cd{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1.5px solid var(--bd);border-radius:7px;cursor:pointer;background:#fff;padding:1px;position:relative;overflow:hidden;min-width:0;}
+    .cd:hover{border-color:var(--ac);background:var(--al);}
+    .cd.td{border-color:var(--ok);background:var(--okl);}
+    .cd.hd{border-color:var(--bl);background:var(--bll);}
+    .cd.td.hd{border-color:var(--ok);background:var(--okl);}
+    .cd.ot{opacity:.2;pointer-events:none;}
+    .cdd{font-size:11px;font-weight:700;}
+    .cdw{font-size:8px;color:var(--bl);margin-top:1px;font-weight:700;}
+    .cd.hd .cdd{color:var(--bl);}
+    .cdot{position:absolute;top:2px;right:2px;width:5px;height:5px;background:var(--bl);border-radius:50%;}
+    /* ボトムナビ 4タブ */
+    .bn{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--bd);display:flex;padding:6px 0 8px;z-index:100;}
+    .ni{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:5px;font-size:10px;color:var(--md);cursor:pointer;border:none;background:none;font-family:inherit;}
+    .ni.active{color:var(--ac);font-weight:700;}
+    .nii{font-size:22px;}
+    /* モーダル */
+    .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:1000;align-items:flex-end;justify-content:center;}
+    .modal.active{display:flex;}
+    .ms{background:#fff;padding:22px;border-radius:15px 15px 0 0;width:100%;max-width:520px;animation:su .25s ease;max-height:88vh;overflow-y:auto;}
+    @keyframes su{from{transform:translateY(50px);opacity:.5}to{transform:translateY(0);opacity:1}}
+    .mh{width:38px;height:4px;background:var(--bd);border-radius:2px;margin:0 auto 14px;}
+    .mt2{font-size:16px;font-weight:700;margin-bottom:3px;}
+    .msb{font-size:12px;color:var(--md);margin-bottom:13px;}
+    .rt{width:100%;border-collapse:collapse;margin:10px 0;}
+    .rt th{font-size:11px;color:var(--md);text-align:left;padding:5px 7px;border-bottom:1.5px solid var(--bd);font-weight:600;}
+    .rt td{font-size:12px;padding:6px 7px;border-bottom:1px solid var(--bd);}
+    .rt tr:last-child td{border-bottom:none;}
+    .rtot{background:var(--dk);color:var(--cr);border-radius:7px;padding:9px 11px;font-size:13px;font-weight:700;display:flex;justify-content:space-between;margin-top:7px;}
+    .rn{background:var(--okl);border-radius:7px;padding:9px 11px;font-size:12px;color:#166534;line-height:1.5;margin-top:9px;}
+    .toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--dk);color:var(--cr);padding:9px 18px;border-radius:18px;font-size:13px;z-index:2000;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap;}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+    .toast.ok{background:var(--ok);}
+    .toast.ng{background:var(--eb);}
+    .loading{text-align:center;padding:28px 18px;}
+    .sp{width:34px;height:34px;border:3px solid var(--bd);border-top-color:var(--ac);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 10px;}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .ai{background:#fff;border-radius:11px;padding:14px;margin-bottom:11px;box-shadow:0 2px 5px rgba(0,0,0,.05);}
+    .ai h3{font-size:13px;font-weight:700;margin-bottom:9px;}
+    .sbadge{font-size:10px;color:var(--ac);font-weight:700;background:var(--al);padding:2px 6px;border-radius:4px;margin-left:5px;vertical-align:middle;}
+    .hidden{display:none;}
+    #menstrualSec{overflow:hidden;}
+    .section-label{font-size:12px;font-weight:700;color:var(--md);margin:16px 0 8px;letter-spacing:.5px;text-transform:uppercase;}
+  </style>
+</head>
+<body>
+<header>
+  <div class="logo">kaori's method</div>
+  <h1>ダイエット管理</h1>
+</header>
+
+<!-- ① ホーム：体重記録＋グラフのみ -->
+<div class="screen active" id="homeScreen">
+  <div id="safetyW"></div>
+  <!-- ② 生理周期バナー -->
+  <div id="cycleBanner"></div>
+  <div class="card">
+    <h3>⚖️ 体重を記録</h3>
+    <div class="fg" style="margin-bottom:0;">
+      <label>今日の体重（kg）</label>
+      <div class="iu"><input type="number" id="todayWeight" placeholder="60.5" step="0.1" inputmode="decimal"><span>kg</span></div>
+    </div>
+    <button class="btn btn-p" onclick="recordWeight()">記録する</button>
+  </div>
+
+  <div class="card">
+    <h3>📈 体重グラフ</h3>
+    <canvas id="pChart" style="max-height:220px;margin:4px 0 8px;"></canvas>
+    <p id="noChartMsg" style="font-size:12px;color:var(--md);text-align:center;padding:12px 0;">体重を2件以上記録するとグラフが表示されます</p>
+  </div>
+</div>
+
+<!-- ② 献立：黒枠カード＋週間献立 -->
+<div class="screen" id="menuScreen">
+  <div class="ndc" id="nCard"></div>
+
+  <div id="menuLoading" class="loading hidden">
+    <div class="sp"></div>
+    <p style="font-size:14px;color:var(--md);">献立を作成中...</p>
+  </div>
+
+  <div id="menuResult" class="hidden">
+    <div class="tn" id="weekTabs"></div>
+    <div id="dayMenu"></div>
+    <button class="btn btn-p" style="margin-top:4px;" onclick="generateMenu()">新しく献立を作り直す 🔄</button>
+  </div>
+
+  <div id="menuInit">
+    <div class="tp">💡 目標カロリーに合わせて食材のグラム数を自動調整します。<br>各メニューをタップするとレシピ・食材量が確認できます🍳</div>
+    <button class="btn btn-p" onclick="generateMenu()">献立を生成する</button>
+  </div>
+</div>
+
+<!-- ③ 記録：進捗サマリー＋カレンダー -->
+<div class="screen" id="recordScreen">
+  <div class="stitle">📋 記録・進捗</div>
+
+  <!-- ④ 週次レポート -->
+  <div id="weeklyReport"></div>
+
+  <!-- ② 生理周期フェーズバナー -->
+  <div id="menstrualBanner"></div>
+
+  <div class="section-label">進捗サマリー</div>
+  <div id="safetyW2"></div>
+  <div class="sg" id="pStats"></div>
+  <div id="pBar" style="margin-bottom:9px;"></div>
+  <div id="anaStats"></div>
+
+  <div class="section-label" style="margin-top:14px;">体重カレンダー</div>
+  <div class="ib">🔵 青いマス＝記録あり。タップすると編集・削除もできます</div>
+  <div id="calCont"></div>
+</div>
+
+<!-- ④ 設定：設定＋ダイエット知識 -->
+<div class="screen" id="settingsScreen">
+  <div class="stitle">⚙️ 設定</div>
+
+  <div class="card"><h3>基本情報</h3>
+    <div class="fg"><label>性別</label>
+      <div class="rg">
+        <div class="rb"><input type="radio" name="gender" id="gF" value="female" checked onchange="toggleMenstrual()"><label for="gF">女性</label></div>
+        <div class="rb"><input type="radio" name="gender" id="gM" value="male" onchange="toggleMenstrual()"><label for="gM">男性</label></div>
+      </div>
+    </div>
+    <!-- ② 生理周期設定（女性のみ表示） -->
+    <div id="menstrualSec">
+      <div class="fg">
+        <label>生理が始まった日</label>
+        <input type="date" id="sLastPeriodDate" onchange="onPeriodDateChange()"
+          style="width:100%;padding:11px 14px;border:1.5px solid var(--bd);border-radius:10px;font-size:15px;font-family:inherit;background:#fff;color:var(--dk);">
+        <button type="button" onclick="setTodayAsPeriodStart()"
+          style="margin-top:8px;padding:9px 14px;background:var(--al);border:1.5px solid var(--ac);border-radius:9px;font-size:12px;font-weight:700;font-family:inherit;cursor:pointer;color:var(--dk);width:100%;">
+          🌸 今日から生理が始まった
+        </button>
+      </div>
+      <div class="fg">
+        <label>生理が終わった日（任意）</label>
+        <input type="date" id="sPeriodEndDate" onchange="onPeriodEndDateChange()"
+          style="width:100%;padding:11px 14px;border:1.5px solid var(--bd);border-radius:10px;font-size:15px;font-family:inherit;background:#fff;color:var(--dk);">
+        <button type="button" onclick="setTodayAsPeriodEnd()"
+          style="margin-top:8px;padding:9px 14px;background:var(--okl);border:1.5px solid var(--ok);border-radius:9px;font-size:12px;font-weight:700;font-family:inherit;cursor:pointer;color:#166534;width:100%;">
+          ✅ 今日で生理が終わった
+        </button>
+        <p style="font-size:11px;color:var(--md);margin-top:7px;line-height:1.6;">
+          不規則な方は生理が始まったら都度入力してください。<br>前日など過去の日付も選択できます。
+        </p>
+      </div>
+    </div>
+    <div class="fg"><label>年齢</label><div class="iu"><input type="number" id="sAge" placeholder="30"><span>歳</span></div></div>
+    <div class="fg"><label>身長</label><div class="iu"><input type="number" id="sHt" placeholder="160"><span>cm</span></div></div>
+    <div class="fg"><label>現在の体重</label><div class="iu"><input type="number" id="sWt" placeholder="65" step="0.1"><span>kg</span></div></div>
+    <div class="fg"><label>目標体重</label><div class="iu"><input type="number" id="sTg" placeholder="55" step="0.1"><span>kg</span></div></div>
+    <div class="fg"><label>活動量</label>
+      <div class="rg" style="gap:5px;">
+        <div class="rb"><input type="radio" name="act" id="aVLow" value="1.2" onchange="updateActDesc()"><label for="aVLow" style="font-size:11px;">かなり<br>低い<br><span style="font-size:9px;">×1.2</span></label></div>
+        <div class="rb"><input type="radio" name="act" id="aLow" value="1.375" onchange="updateActDesc()" checked><label for="aLow" style="font-size:11px;">低い<br><br><span style="font-size:9px;">×1.375</span></label></div>
+        <div class="rb"><input type="radio" name="act" id="aMid" value="1.55" onchange="updateActDesc()"><label for="aMid" style="font-size:11px;">普通<br><br><span style="font-size:9px;">×1.55</span></label></div>
+        <div class="rb"><input type="radio" name="act" id="aHi" value="1.725" onchange="updateActDesc()"><label for="aHi" style="font-size:11px;">高い<br><br><span style="font-size:9px;">×1.725</span></label></div>
+        <div class="rb"><input type="radio" name="act" id="aVHi" value="1.9" onchange="updateActDesc()"><label for="aVHi" style="font-size:11px;">かなり<br>高い<br><span style="font-size:9px;">×1.9</span></label></div>
+      </div>
+    </div>
+    <!-- 活動量の説明ボックス -->
+    <div id="actDesc" style="background:var(--bll);border-left:3px solid var(--bl);border-radius:8px;padding:11px 13px;margin-bottom:14px;font-size:12px;color:#1e3a5f;line-height:1.7;"></div>
+    <div class="fg"><label>減量ペース</label>
+      <div class="rg">
+        <div class="rb"><input type="radio" name="def" id="dG" value="300"><label for="dG">ゆるめ<br><span style="font-size:9px;">−300</span></label></div>
+        <div class="rb"><input type="radio" name="def" id="dS" value="500" checked><label for="dS">標準<br><span style="font-size:9px;">−500</span></label></div>
+        <div class="rb"><input type="radio" name="def" id="dH" value="700"><label for="dH">ガチ<br><span style="font-size:9px;">−700</span></label></div>
+      </div>
+    </div>
+    <!-- ② 生理周期設定は下の menstrualSec で処理 -->
+  </div>
+  <button class="btn btn-p" onclick="saveSettings()">設定を保存</button>
+
+  <div class="section-label" style="margin-top:18px;">ダイエット知識</div>
+  <div class="ai"><h3>💡 血糖値コントロール</h3>
+    <p style="font-size:12px;line-height:1.8;color:var(--md);">食べる順番：<strong style="color:var(--dk);">野菜 → タンパク質 → 糖質</strong><br>インスリン分泌が抑えられ脂肪がつきにくくなります。糖質1g＝水分3gを引き込むため、急激な糖質カットは一時的に体重が落ちます（脂肪ではない）。</p>
+  </div>
+  <div class="ai"><h3>💧 むくみ対策</h3>
+    <p style="font-size:12px;line-height:1.8;color:var(--md);">
+      ✅ 朝起きたら200〜500ml の水を飲む<br>
+      ✅ 1日の水分目標：1.2〜1.5L<br>
+      ✅ 塩分目標：女性6.5g未満 ／ 男性7.5g未満<br>
+      ❌ 夜9時以降は水分を控える<br>
+      ❌ 水を減らす（逆効果）<br>
+      むくみは脂肪ではありません。数日で改善できます✊
+    </p>
+  </div>
+  <div class="ai"><h3>🌿 腸活のコツ</h3>
+    <p style="font-size:12px;line-height:1.8;color:var(--md);"><strong style="color:var(--dk);">発酵食品＋食物繊維</strong>が最強コンビ。納豆・味噌・ヨーグルト（無糖）＋わかめ・バナナ・ごぼうなど水溶性食物繊維で腸を整えましょう。</p>
+  </div>
+  <div class="ai"><h3>📋 減量ペースの基準</h3>
+    <div style="font-size:12px;color:var(--md);line-height:2.0;">
+      月減量が体重の <strong style="color:var(--dk);">1%未満</strong>：🔄 ゆっくり<br>
+      月減量が体重の <strong style="color:var(--dk);">1〜3%</strong>：✅ 安全ペース（推奨）<br>
+      月減量が体重の <strong style="color:var(--dk);">3〜5%</strong>：✅ 良いペース<br>
+      月減量が体重の <strong style="color:var(--dk);">5%以上</strong>：⚠️ 速すぎる
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;">
+    <button class="btn btn-s" onclick="exportData()" style="margin-top:0;font-size:12px;">📤 データ書き出し</button>
+    <button class="btn btn-s" onclick="document.getElementById('importFile').click()" style="margin-top:0;font-size:12px;">📥 データ読み込み</button>
+  </div>
+  <input type="file" id="importFile" accept=".json" style="display:none;" onchange="importData(event)">
+  <button class="btn btn-d" onclick="confirmReset()" style="margin-top:8px;font-size:13px;">⚠️ データをリセット</button>
+</div>
+
+<!-- ボトムナビ 4タブ -->
+<div class="bn">
+  <button class="ni active" data-s="home" onclick="goScreen('home')"><div class="nii">🏠</div><div>ホーム</div></button>
+  <button class="ni" data-s="menu" onclick="goScreen('menu')"><div class="nii">🍚</div><div>献立</div></button>
+  <button class="ni" data-s="record" onclick="goScreen('record')"><div class="nii">📋</div><div>記録</div></button>
+  <button class="ni" data-s="settings" onclick="goScreen('settings')"><div class="nii">⚙️</div><div>設定</div></button>
+</div>
+
+<!-- 体重モーダル -->
+<div class="modal" id="wModal" onclick="if(event.target===this)closeWM()">
+  <div class="ms">
+    <div class="mh"></div>
+    <div class="mt2" id="wmTitle">体重を入力</div>
+    <div class="msb" id="wmSub"></div>
+    <div class="fg"><label>体重（kg）</label>
+      <div class="iu"><input type="number" id="mwVal" placeholder="60.5" step="0.1" inputmode="decimal"><span>kg</span></div>
+    </div>
+    <button class="btn btn-p" onclick="saveWM()">保存する</button>
+    <button class="btn btn-d" id="delWBtn" onclick="deleteW()" style="display:none;">この日の記録を削除する</button>
+    <button class="btn btn-s" onclick="closeWM()">キャンセル</button>
+  </div>
+</div>
+
+<!-- レシピモーダル -->
+<div class="modal" id="rModal" onclick="if(event.target===this)closeRM()">
+  <div class="ms">
+    <div class="mh"></div>
+    <div class="mt2" id="rmTitle"></div>
+    <div class="msb" id="rmType"></div>
+    <table class="rt">
+      <thead><tr><th>食材</th><th>量</th><th style="text-align:right;">kcal</th></tr></thead>
+      <tbody id="rmBody"></tbody>
+    </table>
+    <div class="rtot"><span>合計</span><span id="rmTotal"></span></div>
+    <div class="rn" id="rmNote"></div>
+    <div id="rmCalNote" style="font-size:11px;color:var(--md);margin-top:8px;line-height:1.5;"></div>
+    <button class="btn btn-s" style="margin-top:14px;" onclick="closeRM()">閉じる</button>
+  </div>
+</div>
+
+<!-- 確認モーダル -->
+<div class="modal" id="cfModal" onclick="if(event.target===this)closeCF()">
+  <div class="ms">
+    <div class="mh"></div>
+    <div class="mt2" id="cfTitle">確認</div>
+    <p id="cfMsg" style="font-size:14px;color:var(--md);margin:10px 0 18px;line-height:1.7;"></p>
+    <button class="btn btn-d" id="cfOK" onclick="handleCFOK()">削除する</button>
+    <button class="btn btn-s" onclick="closeCF()">キャンセル</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ============================================================
+// ユーティリティ
+// ============================================================
+function lds(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function tds(){return lds(new Date());}
+// 月=0, 火=1, ..., 日=6（週間メニューのインデックス）
+function todayIdx(){const d=new Date().getDay();return d===0?6:d-1;}
+
+let _cb=null;
+function showCF(title,msg,okTxt,cb){
+  document.getElementById('cfTitle').textContent=title;
+  document.getElementById('cfMsg').textContent=msg;
+  document.getElementById('cfOK').textContent=okTxt;
+  _cb=cb;document.getElementById('cfModal').classList.add('active');
+}
+function handleCFOK(){closeCF();if(_cb)_cb();_cb=null;}
+function closeCF(){document.getElementById('cfModal').classList.remove('active');}
+
+let _tt=null;
+function toast(msg,type){
+  const el=document.getElementById('toast');
+  el.textContent=msg;el.className='toast '+(type||'')+' show';
+  clearTimeout(_tt);_tt=setTimeout(()=>el.classList.remove('show'),2600);
+}
+
+// ============================================================
+// 状態
+// ============================================================
+let S={gender:'female',age:30,height:160,weight:65,target:55,activity:1.55,deficit:500,cycleLen:28,periodDate:null,periodEnd:null};
+let R=[],WM=null,SD=null,CY=new Date().getFullYear(),CM=new Date().getMonth();
+
+window.addEventListener('load',()=>{
+  // 旧キーからマイグレーション
+  var migKeys=['kaori_v5','kaori_v4','kaoriDiet_v3','kaoriDietApp_v2','kaoriDietApp'];
+  for(var mi=0;mi<migKeys.length;mi++){var k=migKeys[mi];
+    var old=localStorage.getItem(k);
+    if(old&&!localStorage.getItem('kaori_diet_app')){
+      localStorage.setItem('kaori_diet_app',old);
+    }
+    if(k!=='kaori_diet_app')localStorage.removeItem(k);
+  }
+  var raw=localStorage.getItem('kaori_diet_app');
+  if(raw){
+    try{var d=JSON.parse(raw);S=Object.assign({},S,d.s);R=d.r||[];WM=d.m||null;}catch(e){}
+    loadSUI();renderHome();renderRecord();
+    if(WM)renderMS();
+  } else {
+    goScreen('settings');
+  }
+});
+// キーを固定（kaori_diet_app で統一）
+function save(){localStorage.setItem('kaori_diet_app',JSON.stringify({s:S,r:R,m:WM}));}
+
+// ============================================================
+// 画面遷移
+// ============================================================
+function goScreen(name){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(name+'Screen').classList.add('active');
+  document.querySelectorAll('.ni').forEach(n=>n.classList.toggle('active',n.dataset.s===name));
+  window.scrollTo(0,0);
+  if(name==='home')    renderHome();
+  if(name==='menu')    renderMS();
+  if(name==='record')  renderRecord();
+}
+
+// ============================================================
+// カロリー計算（Mifflin-St Jeor式）
+// ============================================================
+// 最新の記録済み体重を返す（記録がなければ設定値）
+function latestWeight(){
+  if(R.length===0)return S.weight;
+  return R.slice().sort((a,b)=>a.date.localeCompare(b.date)).pop().weight;
+}
+
+// カロリー計算：体重は「最新記録値」を使用
+// → 体重が減るたびにBMRが下がり、目標摂取カロリーも自動で減少する
+function calc(){
+  const w=latestWeight(); // ← S.weightではなく最新記録体重
+  const{gender:g,height:h,age:a,activity:act,deficit:def}=S;
+  const bmr=g==='female'
+    ?Math.round(10*w+6.25*h-5*a-161)
+    :Math.round(10*w+6.25*h-5*a+5);
+  const tdee=Math.round(bmr*act);
+  let dc=tdee-def;
+  const minC=g==='female'?1200:1500;
+  const floor=dc<minC;if(floor)dc=minC;
+  const lbm=Math.round(w*(g==='female'?0.75:0.85));
+  const prot=Math.round(lbm*1.8);
+  const fat=Math.round(dc*0.25/9);
+  const carb=Math.max(0,Math.round((dc-prot*4-fat*9)/4));
+  const bf=Math.round(dc*0.25);
+  const lu=Math.round(dc*0.35);
+  const di=Math.round(dc*0.28);
+  const sn=dc-(bf+lu+di);
+  return{bmr,tdee,dc,prot,fat,carb,lbm,floor,minC,bf,lu,di,sn,w};
+}
+
+// ============================================================
+// ① カロリー整合スケーリング
+// ① 重要修正：calは食材kcal合計（四捨五入の誤差を含む実際値）
+// ============================================================
+function scaleAmt(str,r){
+  if(Math.abs(r-1)<0.04)return str;
+  const m1=str.match(/^(\d+(?:\.\d+)?)(g|ml)(.*)$/);
+  if(m1){var n=parseFloat(m1[1]),sc=Math.round(n*r/5)*5||Math.round(n*r);return sc+m1[2]+m1[3];}
+  const m2=str.match(/^(.+?)（(\d+(?:\.\d+)?)(g|ml)）(.*)$/);
+  if(m2){var n2=parseFloat(m2[2]),sc2=Math.round(n2*r/5)*5||Math.round(n2*r);return m2[1]+'（'+sc2+m2[3]+'）'+m2[4];}
+  const m3=str.match(/^大さじ(\d+(?:\.\d+)?)(.*)$/);
+  if(m3){var sc3=Math.round(parseFloat(m3[1])*r*2)/2;return '大さじ'+sc3+m3[2];}
+  return str;
+}
+
+function scaleMeal(meal,targetCal){
+  if(!meal||!meal.cal||!targetCal)return meal;
+  const ratio=targetCal/meal.cal;
+  if(ratio<0.45||ratio>3.2)return Object.assign({},meal);
+  const newIg=(meal.ig||[]).map(i=>({
+    n:i.n, a:scaleAmt(i.a,ratio), c:Math.round(i.c*ratio)
+  }));
+  const actualCal=newIg.length>0 ? newIg.reduce((s,i)=>s+i.c,0) : targetCal;
+  // ★ マクロ（P/F/Ca）もスケール比で比例させる
+  const scaled={
+    ...meal, cal:actualCal, ig:newIg,
+    _scaled:Math.abs(ratio-1)>0.05, _target:targetCal
+  };
+  if(meal.p!=null) scaled.p=Math.round(meal.p*ratio);
+  if(meal.f!=null) scaled.f=Math.round(meal.f*ratio);
+  if(meal.ca!=null) scaled.ca=Math.round(meal.ca*ratio);
+  return scaled;
+}
+
+// ============================================================
+// ホーム
+// ============================================================
+function renderHome(){
+  if(R.length===0)R.push({date:tds(),weight:S.weight});
+  var lastW=(R.length>0&&R[R.length-1]?R[R.length-1].weight:S.weight);var bmi=lastW/((S.height/100)**2);
+  var tbmi=S.target/((S.height/100)**2);
+  var warns='';
+  if(bmi<18.5)warns+='<div class="eb2">⚠️ 現在のBMI '+bmi.toFixed(1)+' が18.5未満。これ以上の減量は健康リスクがあります。</div>';
+  if(tbmi<18.5)warns+='<div class="wb2">⚠️ 目標体重のBMI '+tbmi.toFixed(1)+' が18.5を下回っています。目標を見直してください。</div>';
+  document.getElementById('safetyW').innerHTML=warns;
+  renderMenstrualBanner(); // ② 生理周期バナー
+  drawChart();
+}
+
+function drawChart(){
+  const canvas=document.getElementById('pChart');
+  const msg=document.getElementById('noChartMsg');
+  if(!canvas)return;
+  const sr=R.slice().sort((a,b)=>a.date.localeCompare(b.date));
+  if(sr.length<2){canvas.style.display='none';msg.style.display='block';return;}
+  canvas.style.display='block';msg.style.display='none';
+  const ctx=canvas.getContext('2d');
+  const ws=sr.map(r=>r.weight);
+  const W=canvas.offsetWidth||300,H=200;
+  canvas.width=W;canvas.height=H;
+  ctx.clearRect(0,0,W,H);
+  var mnArr=ws.slice();mnArr.push(S.target);
+  var mn=mnArr.reduce(function(a,b){return a<b?a:b;})-1;
+  var mx=ws.reduce(function(a,b){return a>b?a:b;})+1;
+  const px=40,py=14,gW=W-px*2,gH=H-py*2;
+  const gx=i=>px+(gW/Math.max(ws.length-1,1))*i;
+  const gy=v=>py+gH-((v-mn)/(mx-mn))*gH;
+  ctx.strokeStyle='#eee';ctx.lineWidth=1;
+  for(let i=0;i<=4;i++){
+    const y=py+(gH/4)*i;
+    ctx.beginPath();ctx.moveTo(px,y);ctx.lineTo(W-px,y);ctx.stroke();
+    ctx.fillStyle='#bbb';ctx.font='9px sans-serif';
+    ctx.fillText((mx-((mx-mn)/4)*i).toFixed(1),2,y+3);
+  }
+  const ty=gy(S.target);
+  ctx.strokeStyle='rgba(196,149,106,.8)';ctx.lineWidth=1.5;ctx.setLineDash([4,3]);
+  ctx.beginPath();ctx.moveTo(px,ty);ctx.lineTo(W-px,ty);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='#C4956A';ctx.font='bold 9px sans-serif';ctx.fillText('目標',W-px+2,ty+3);
+  ctx.strokeStyle='#4A90E2';ctx.lineWidth=2.5;ctx.beginPath();
+  ws.forEach((v,i)=>{i===0?ctx.moveTo(gx(i),gy(v)):ctx.lineTo(gx(i),gy(v));});ctx.stroke();
+  ws.forEach((v,i)=>{
+    const x=gx(i),y=gy(v);
+    ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(x,y,4,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#4A90E2';ctx.beginPath();ctx.arc(x,y,3,0,Math.PI*2);ctx.fill();
+  });
+}
+
+function recordWeight(){
+  const v=parseFloat(document.getElementById('todayWeight').value);
+  if(!v||v<20||v>300){toast('体重を正しく入力してください（20〜300kg）','ng');return;}
+  const today=tds(),idx=R.findIndex(r=>r.date===today);
+  if(idx>=0)R[idx].weight=v;else R.push({date:today,weight:v});
+  save();document.getElementById('todayWeight').value='';
+  toast('✅ 体重を記録しました！','ok');renderHome();renderRecord();
+}
+
+// ============================================================
+// 記録画面（進捗サマリー＋カレンダー）
+// ============================================================
+function renderRecord(){
+  const sr=R.slice().sort((a,b)=>a.date.localeCompare(b.date));
+  if(sr.length===0){
+    document.getElementById('pStats').innerHTML='<p style="font-size:12px;color:var(--md);">体重を記録すると進捗が表示されます</p>';
+    document.getElementById('pBar').innerHTML='';
+    document.getElementById('safetyW2').innerHTML='';
+    renderCal();return;
+  }
+  const first=sr[0].weight,cur=sr[sr.length-1].weight;
+  const loss=first-cur,toGo=Math.max(0,cur-S.target);
+  const pct=Math.min(100,Math.max(0,((first-cur)/Math.max(0.1,first-S.target))*100));
+  const bmi=cur/((S.height/100)**2);
+  var tbmi=S.target/((S.height/100)**2);
+  var warns='';
+  if(bmi<18.5)warns+='<div class="eb2">⚠️ 現在のBMI '+bmi.toFixed(1)+' が18.5未満。これ以上の減量は健康リスクがあります。</div>';
+  if(tbmi<18.5)warns+='<div class="wb2">⚠️ 目標体重のBMI '+tbmi.toFixed(1)+' が18.5を下回っています。</div>';
+  document.getElementById('safetyW2').innerHTML=warns;
+
+  var ps='';
+  ps+='<div class="sb"><div class="sl2">初回体重</div><div class="sv">'+first.toFixed(1)+'<span style="font-size:11px;">kg</span></div></div>';
+  ps+='<div class="sb ac"><div class="sl2">目標体重</div><div class="sv acc">'+S.target.toFixed(1)+'<span style="font-size:11px;">kg</span></div></div>';
+  ps+='<div class="sb"><div class="sl2">現在</div><div class="sv">'+cur.toFixed(1)+'<span style="font-size:11px;">kg</span></div></div>';
+  ps+='<div class="sb gr"><div class="sl2">減量合計</div><div class="sv gn">'+(loss>=0?'-':'+')+Math.abs(loss).toFixed(1)+'<span style="font-size:11px;">kg</span></div></div>';
+  var toGoClass=toGo<=0?'gn':'';
+  var toGoVal=toGo<=0?'達成🎉':toGo.toFixed(1)+'<span style="font-size:11px;">kg</span>';
+  ps+='<div class="sb"><div class="sl2">目標まで</div><div class="sv '+toGoClass+'">'+toGoVal+'</div></div>';
+  document.getElementById('pStats').innerHTML=ps;
+  document.getElementById('pBar').innerHTML=
+    '<div style="display:flex;justify-content:space-between;font-size:11px;color:var(--md);margin-bottom:3px;"><span>達成率</span><span>'+pct.toFixed(0)+'%</span></div>'+
+    '<div class="pw"><div class="pb" style="width:'+pct+'%;"></div></div>';
+
+  // ★ 週平均・月平均でペース評価（直近N日 vs その前のN日の比較）
+  const anaEl=document.getElementById('anaStats');
+  if(sr.length>=2){
+    const wL=calcAvgLoss(7);
+    const mL=calcAvgLoss(30);
+    const paceVal=mL!==null?mL:wL;
+    const curW=latestWeight();
+    const paceLabel=(v)=>{
+      if(v===null)return'−';
+      if(v<0)return'⚠️増加中';
+      const p=(v/curW)*100;
+      if(p>=5)return'⚠️速すぎる';
+      if(p>=3)return'✅良いペース';
+      if(p>=1)return'✅安全ペース';
+      return'🔄ゆっくり';
+    };
+    const paceNote=(v)=>{
+      if(v===null)return'前の期間のデータがまだ不足しています';
+      if(v<0)return'体重が増加傾向です。食事内容と水分量を見直してみましょう。';
+      const p=(v/curW)*100;
+      if(p>=5)return'月5%以上の減量は筋肉も落ちやすくなります。ペースを落として安全に✊';
+      if(p>=3)return'順調なペースです！このまま続けていきましょう✊';
+      if(p>=1)return'理想的なペースです。焦らず続けることが一番の近道✨';
+      return '変化が緩やかです。停滞期の可能性も。食事・睡眠・水分量を見直してみて。';
+    };
+
+    // ① 停滞期
+    const plateau=detectPlateau(10,0.3);
+    let html='';
+    if(plateau){
+      html+='<div style="background:var(--wn);border-left:4px solid var(--wb);border-radius:9px;padding:12px 14px;margin-bottom:10px;">';
+      html+='<div style="font-size:13px;font-weight:700;color:#92400E;margin-bottom:4px;">🔄 停滞期かもしれません</div>';
+      html+='<p style="font-size:12px;color:#92400E;line-height:1.7;">直近'+plateau.days+'日間、体重が±0.3kg以内（平均'+plateau.avg+'kg）に収まっています。<br>';
+      html+='停滞期は体が変化に慣れてきたサインです。脂肪が落ちていないわけではありません。<br>';
+      html+='食べる量を少し変える・水分を増やす・睡眠を整えると抜けやすくなります✊</p></div>';
+    }
+
+    // 週平均・月平均・ペース
+    html+='<div class="sg3" style="margin-top:0;margin-bottom:8px;">';
+    html+='<div class="sb"><div class="sl2">週平均変化</div>';
+    html+='<div class="sv gn" style="font-size:15px;">'+(wL!==null?(wL>=0?'−':'+')+Math.abs(wL).toFixed(1)+'kg':'不足')+'</div>';
+    html+='<div style="font-size:10px;color:var(--md);margin-top:2px;">直近7日 vs 前7日</div></div>';
+    html+='<div class="sb"><div class="sl2">月平均変化</div>';
+    html+='<div class="sv gn" style="font-size:15px;">'+(mL!==null?(mL>=0?'−':'+')+Math.abs(mL).toFixed(1)+'kg':'不足')+'</div>';
+    html+='<div style="font-size:10px;color:var(--md);margin-top:2px;">直近30日 vs 前30日</div></div>';
+    html+='<div class="sb"><div class="sl2">ペース評価</div>';
+    html+='<div class="sv" style="font-size:11px;margin-top:2px;">'+paceLabel(paceVal)+'</div>';
+    html+='<div style="font-size:10px;color:var(--md);margin-top:2px;">'+(mL!==null?'月平均基準':'週平均基準')+'</div></div></div>';
+    html+='<p style="font-size:12px;color:var(--md);margin-bottom:10px;line-height:1.6;">'+paceNote(paceVal)+'</p>';
+
+    // ③ 目標達成予定日
+    if(mL!==null&&mL>0&&toGo>0){
+      const goalDate=new Date();
+      goalDate.setDate(goalDate.getDate()+Math.round((toGo/mL)*30));
+      const gy=goalDate.getFullYear(),gm=goalDate.getMonth()+1,gd=goalDate.getDate();
+      html+='<div style="background:var(--okl);border-left:4px solid var(--ok);border-radius:9px;padding:12px 14px;margin-bottom:10px;">';
+      html+='<div style="font-size:12px;font-weight:700;color:var(--ok);margin-bottom:3px;">🎯 現在のペースが続くと…</div>';
+      html+='<div style="font-size:18px;font-weight:700;color:var(--dk);">'+gy+'年'+gm+'月'+gd+'日ごろ</div>';
+      html+='<div style="font-size:11px;color:var(--md);margin-top:3px;">目標体重 '+S.target+'kg に到達予定（月'+mL.toFixed(1)+'kg減ペース基準）</div></div>';
+    }
+    anaEl.innerHTML=html;
+  } else {
+    anaEl.innerHTML='<p style="font-size:12px;color:var(--md);margin-bottom:13px;">記録が増えると分析が表示されます</p>';
+  }
+  renderCal();
+  renderMenstrualBanner(); // ② 生理周期バナー
+  renderWeeklyReport();    // ④ 週次レポート
+}
+// ============================================================
+function renderCal(){
+  var y=CY,m=CM;
+  var fd=new Date(y,m,1).getDay();
+  var ld=new Date(y,m+1,0).getDate();
+  var today=tds();
+  var h='';
+  h+='<div class="cmn">';
+  h+='<button onclick="prevM()">◀ 前月</button>';
+  h+='<span class="cml">'+y+'年'+(m+1)+'月</span>';
+  h+='<button onclick="nextM()">次月 ▶</button>';
+  h+='</div><div class="cg">';
+  var dows=['日','月','火','水','木','金','土'];
+  for(var di=0;di<7;di++)h+='<div class="cd2">'+dows[di]+'</div>';
+  for(var i=0;i<fd;i++)h+='<div class="cd ot"></div>';
+  for(var d=1;d<=ld;d++){
+    var ds=lds(new Date(y,m,d));
+    var rec=R.find(function(r){return r.date===ds;});
+    var isT=ds===today;
+    var cls='cd';
+    if(isT)cls+=' td';
+    if(rec)cls+=' hd';
+    h+='<div class="'+cls+'" onclick="openWM(\''+ds+'\')">';
+    if(rec)h+='<div class="cdot"></div>';
+    h+='<div class="cdd">'+d+'</div>';
+    if(rec)h+='<div class="cdw">'+rec.weight+'kg</div>';
+    h+='</div>';
+  }
+  var ed=new Date(y,m,ld).getDay();
+  if(ed<6){for(var j=ed+1;j<=6;j++)h+='<div class="cd ot"></div>';}
+  h+='</div>';
+  document.getElementById('calCont').innerHTML=h;
+}
+function prevM(){if(CM===0){CY--;CM=11;}else CM--;renderCal();}
+function nextM(){if(CM===11){CY++;CM=0;}else CM++;renderCal();}
+
+// ============================================================
+// 体重モーダル
+// ============================================================
+function openWM(ds){
+  SD=ds;
+  const rec=R.find(r=>r.date===ds);
+  var parts=ds.split('-');var mo=parts[1];var d=parts[2];
+  document.getElementById('wmTitle').textContent=(rec?parseInt(mo)+'月'+parseInt(d)+'日の体重を編集':parseInt(mo)+'月'+parseInt(d)+'日の体重を入力');
+  document.getElementById('wmSub').textContent=rec?'値を変更して「保存する」を押してください':'';
+  document.getElementById('mwVal').value=rec?rec.weight:'';
+  document.getElementById('delWBtn').style.display=rec?'block':'none';
+  document.getElementById('wModal').classList.add('active');
+  setTimeout(()=>document.getElementById('mwVal').focus(),200);
+}
+function saveWM(){
+  const v=parseFloat(document.getElementById('mwVal').value);
+  if(!v||v<20||v>300){toast('体重を正しく入力してください（20〜300kg）','ng');return;}
+  const idx=R.findIndex(r=>r.date===SD);
+  if(idx>=0)R[idx].weight=v;else R.push({date:SD,weight:v});
+  save();closeWM();renderHome();renderRecord();
+  toast('✅ 体重を保存しました！','ok');
+}
+function deleteW(){
+  showCF('削除の確認','この日の体重記録を削除しますか？','削除する',()=>{
+    R=R.filter(r=>r.date!==SD);
+    save();closeWM();renderHome();renderRecord();toast('削除しました');
+  });
+}
+function closeWM(){document.getElementById('wModal').classList.remove('active');SD=null;}
+
+// ============================================================
+// 食事DB
+// ============================================================
+const DB={
+breakfast:[
+  {name:'ヨーグルト（無糖）＋バナナ＋ゆで卵2個',cal:320,p:22,f:10,ca:34,
+   ig:[{n:'プレーンヨーグルト（無糖）',a:'150g',c:93},{n:'バナナ',a:'100g',c:86},{n:'ゆで卵',a:'2個（100g）',c:151}],
+   nt:'ヨーグルトは食前に食べると腸が活性化。バナナの水溶性食物繊維が善玉菌のエサになります✨'},
+  {name:'オートミール（豆乳）＋ゆで卵',cal:335,p:18,f:9,ca:43,
+   ig:[{n:'オートミール',a:'50g',c:190},{n:'豆乳（無調整）',a:'150ml',c:69},{n:'ゆで卵',a:'1個（50g）',c:76}],
+   nt:'レンジで2分加熱してから豆乳を注ぐと食べやすい。β-グルカンが腸に良い✨'},
+  {name:'納豆ご飯＋味噌汁＋ゆで卵',cal:453,p:23,f:11,ca:65,
+   ig:[{n:'ご飯（白米）',a:'150g',c:252},{n:'納豆',a:'1パック（45g）',c:90},{n:'ゆで卵',a:'1個（50g）',c:76},{n:'わかめ味噌汁',a:'1杯',c:35}],
+   nt:'納豆は50回以上よくかき混ぜると旨みが増す。発酵食品で腸活にも◎'},
+  {name:'卵かけご飯＋納豆＋わかめ味噌汁',cal:414,p:20,f:10,ca:60,
+   ig:[{n:'ご飯（白米）',a:'130g',c:218},{n:'卵',a:'1個（50g）',c:76},{n:'納豆',a:'1パック（45g）',c:90},{n:'わかめ味噌汁',a:'1杯',c:30}],
+   nt:'醤油は小さじ1（約20kcal）程度に抑えて。卵は生で混ぜると消化がよい'},
+  {name:'焼き鮭＋ご飯＋豆腐味噌汁',cal:447,p:27,f:10,ca:60,
+   ig:[{n:'鮭（切り身）',a:'80g',c:106},{n:'ご飯（白米）',a:'150g',c:252},{n:'豆腐・わかめ味噌汁',a:'1杯',c:45},{n:'塩・みりん',a:'少々',c:12},{n:'大根おろし',a:'30g',c:5}],
+   nt:'鮭はオメガ3脂肪酸が豊富。グリルで焼くと余分な脂が落ちる✊'},
+  {name:'玄米おにぎり＋ゆで卵＋味噌汁',cal:421,p:18,f:7,ca:67,
+   ig:[{n:'玄米ご飯',a:'200g（2個分）',c:330},{n:'ゆで卵',a:'1個（50g）',c:76},{n:'味噌汁（具なし）',a:'1杯',c:35}],
+   nt:'玄米はGI値が低く血糖値の上昇がゆるやか。食物繊維も白米の約3倍✨'},
+  {name:'スクランブルエッグ＋全粒粉トースト',cal:374,p:20,f:19,ca:35,
+   ig:[{n:'卵',a:'2個（100g）',c:152},{n:'全粒粉食パン',a:'2枚（80g）',c:185},{n:'バター',a:'5g',c:37}],
+   nt:'弱火でゆっくり作ると半熟でふわふわに。全粒粉パンは食物繊維が豊富✨'},
+  {name:'サラダチキン＋玄米おにぎり＋味噌汁',cal:475,p:34,f:5,ca:65,
+   ig:[{n:'サラダチキン（市販）',a:'100g',c:110},{n:'玄米おにぎり',a:'2個（200g）',c:330},{n:'味噌汁',a:'1杯',c:35}],
+   nt:'鶏むね肉で作るたんぱく質豊富な朝食。玄米で食物繊維もしっかり摂れる✊'},
+  {name:'豆腐丼（温泉卵のせ）＋味噌汁',cal:390,p:18,f:8,ca:54,
+   ig:[{n:'絹豆腐',a:'150g',c:84},{n:'温泉卵',a:'1個（50g）',c:78},{n:'ご飯（白米）',a:'130g',c:218},{n:'めんつゆ',a:'大さじ1',c:10}],
+   nt:'豆腐はタンパク質＋イソフラボン。温泉卵をくずして混ぜると食べやすい✨'},
+  {name:'バナナ＋プロテイン＋ゆで卵',cal:282,p:28,f:7,ca:25,
+   ig:[{n:'バナナ',a:'100g',c:86},{n:'プロテイン（水溶き）',a:'1杯',c:120},{n:'ゆで卵',a:'1個（50g）',c:76}],
+   nt:'忙しい朝に最適。プロテインは水か豆乳で溶くのがおすすめ✊'},
+  {name:'具だくさん味噌汁＋ご飯＋目玉焼き',cal:432,p:18,f:12,ca:60,
+   ig:[{n:'ご飯（白米）',a:'150g',c:252},{n:'目玉焼き',a:'1個（50g）',c:91},{n:'具だくさん味噌汁（豆腐・わかめ・なめこ）',a:'1杯',c:55},{n:'塩・ごま油',a:'少々',c:8}],
+   nt:'目玉焼きは蓋をして蒸し焼きにするとふっくら仕上がる。味噌汁の豆腐でタンパク質も補給✊'},
+  {name:'鶏そぼろご飯＋お吸い物',cal:445,p:25,f:10,ca:63,
+   ig:[{n:'鶏ひき肉',a:'80g',c:110},{n:'ご飯（白米）',a:'150g',c:252},{n:'卵（炒り卵）',a:'1個（50g）',c:76},{n:'お吸い物',a:'1杯',c:25}],
+   nt:'鶏ひき肉は砂糖・醤油・みりんで甘辛く。冷凍保存できるのでまとめて作り置きが便利✨'},
+  {name:'アボカドと卵のトースト（全粒粉）',cal:408,p:18,f:22,ca:38,
+   ig:[{n:'全粒粉食パン',a:'2枚（80g）',c:185},{n:'アボカド',a:'1/2個（80g）',c:128},{n:'ゆで卵',a:'1個（50g）',c:76}],
+   nt:'アボカドの不飽和脂肪酸で満腹感が長続き。レモン汁を少々かけると酸化防止に◎✨'},
+  {name:'ツナトースト（全粒粉）＋サラダ＋ゆで卵',cal:392,p:28,f:12,ca:38,
+   ig:[{n:'全粒粉食パン',a:'2枚（80g）',c:185},{n:'ツナ缶（水煮）',a:'1缶（70g）',c:53},{n:'ゆで卵',a:'1個（50g）',c:76},{n:'レタス・トマト',a:'80g',c:18}],
+   nt:'ツナはマヨネーズを使わずそのままのせるとカロリーオフ。カラシを薄く塗ると風味UP✊'},
+  {name:'雑穀米おにぎり＋豚汁',cal:452,p:18,f:12,ca:67,
+   ig:[{n:'雑穀米ご飯',a:'200g（2個分）',c:340},{n:'豚汁（豚もも・大根・にんじん）',a:'1杯',c:120}],
+   nt:'雑穀米はミネラル・食物繊維が白米の数倍。豚汁でタンパク質とビタミンB1も補給✨'},
+  {name:'明太子ご飯＋わかめ味噌汁＋ほうれん草お浸し',cal:421,p:18,f:5,ca:73,
+   ig:[{n:'ご飯（白米）',a:'150g',c:252},{n:'明太子',a:'1/2腹（30g）',c:36},{n:'わかめ味噌汁',a:'1杯',c:30},{n:'ほうれん草のお浸し',a:'80g',c:16}],
+   nt:'明太子はビタミンB2が豊富。ほうれん草の鉄分と合わせると貧血対策にも効果的✨'},
+  {name:'しらす丼＋豆腐の味噌汁',cal:397,p:22,f:6,ca:62,
+   ig:[{n:'ご飯（白米）',a:'150g',c:252},{n:'しらす干し',a:'30g',c:48},{n:'大葉・ごま',a:'適量',c:15},{n:'豆腐の味噌汁',a:'1杯',c:55}],
+   nt:'しらすはカルシウム・DHA・EPAが豊富。大葉の香りで食欲アップ✊'},
+  {name:'鶏むね肉の蒸し鶏＋ご飯＋野菜スープ',cal:463,p:33,f:6,ca:65,
+   ig:[{n:'鶏むね肉（皮なし）',a:'100g',c:108},{n:'ご飯（白米）',a:'150g',c:252},{n:'野菜スープ（トマト・玉ねぎ）',a:'1杯',c:60},{n:'ポン酢',a:'大さじ1',c:15}],
+   nt:'鶏むねを電子レンジで蒸すと5分で完成。ポン酢＋ごま油で食べると美味✊'},
+  {name:'ほうれん草と卵の炒め＋ご飯＋汁物',cal:435,p:20,f:14,ca:58,
+   ig:[{n:'卵',a:'2個（100g）',c:152},{n:'ほうれん草',a:'100g',c:20},{n:'ご飯（白米）',a:'130g',c:218},{n:'醤油・ごま油',a:'各少々',c:30},{n:'お吸い物',a:'1杯',c:25}],
+   nt:'炒め物は強火で短時間が鉄則。ほうれん草のビタミンCは熱に弱いので手早く仕上げる✨'},
+  {name:'豆乳粥＋ゆで卵2個',cal:348,p:22,f:10,ca:42,
+   ig:[{n:'ご飯（白米）',a:'100g',c:168},{n:'豆乳（無調整）',a:'200ml',c:92},{n:'ゆで卵',a:'2個（100g）',c:151}],
+   nt:'豆乳粥は消化がよく胃腸に優しい。体調が優れない日や食欲がないときにもおすすめ✨'},
+],
+lunch:[
+  {name:'鶏むね肉の照り焼き定食',cal:485,p:35,f:10,ca:65,
+   ig:[{n:'鶏むね肉（皮なし）',a:'120g',c:130},{n:'ご飯（白米）',a:'150g',c:252},{n:'キャベツの千切り',a:'80g',c:18},{n:'みりん・醤油（たれ）',a:'大さじ各1',c:50},{n:'味噌汁',a:'1杯',c:35}],
+   nt:'片栗粉を薄くまぶすとしっとりジューシーに。皮を取ることで脂質を大幅カット✊'},
+  {name:'豚しゃぶサラダ＋もち麦ご飯＋汁物',cal:463,p:25,f:12,ca:60,
+   ig:[{n:'豚もも薄切り（脂身少）',a:'100g',c:128},{n:'もち麦入りご飯',a:'150g',c:245},{n:'レタス・トマト',a:'120g',c:25},{n:'ポン酢',a:'大さじ2',c:30},{n:'野菜スープ',a:'1杯',c:40}],
+   nt:'お湯で30秒茹でた後冷水で洗うと余分な脂が落ちる。ポン酢はドレッシングより低カロリー'},
+  {name:'さば缶定食（ご飯・野菜炒め・味噌汁）',cal:515,p:30,f:18,ca:55,
+   ig:[{n:'さば缶（水煮）',a:'1缶（135g）',c:173},{n:'ご飯（白米）',a:'150g',c:252},{n:'ほうれん草・もやし炒め',a:'150g',c:55},{n:'味噌汁',a:'1杯',c:35}],
+   nt:'さば水煮缶はDHA・EPA豊富。缶汁ごと調理すると栄養損失なし✨'},
+  {name:'豆腐ハンバーグ定食',cal:479,p:28,f:14,ca:55,
+   ig:[{n:'木綿豆腐',a:'100g',c:72},{n:'鶏ひき肉',a:'80g',c:90},{n:'ご飯（白米）',a:'150g',c:252},{n:'サラダ',a:'80g',c:20},{n:'味噌汁',a:'1杯',c:35}],
+   nt:'豆腐は水切り必須。ボリューム感を保ちながらカロリーダウン✊'},
+  {name:'鮭フレーク丼＋わかめスープ',cal:449,p:22,f:12,ca:58,
+   ig:[{n:'鮭フレーク',a:'50g',c:67},{n:'ご飯（白米）',a:'180g',c:302},{n:'アボカド',a:'40g（1/4個）',c:64},{n:'わかめスープ',a:'1杯',c:20},{n:'醤油・ごま',a:'少々',c:20}],
+   nt:'アボカドの良質な脂質が血糖値の急上昇を抑えてくれる✨'},
+  {name:'親子丼（鶏むね使用）＋汁物',cal:476,p:30,f:12,ca:60,
+   ig:[{n:'鶏むね肉',a:'100g',c:108},{n:'卵',a:'2個（100g）',c:152},{n:'ご飯（白米）',a:'150g',c:252},{n:'玉ねぎ',a:'50g',c:19},{n:'だし・醤油・みりん',a:'適量',c:45}],
+   nt:'鶏むね肉で作ると通常より脂質を約40%カット。卵は半熟仕上げで栄養価が高い'},
+  {name:'ツナわかめサラダ丼＋野菜スープ',cal:384,p:22,f:5,ca:58,
+   ig:[{n:'ツナ缶（水煮）',a:'1缶（70g）',c:53},{n:'ご飯（白米）',a:'150g',c:252},{n:'わかめ',a:'10g',c:14},{n:'きゅうり',a:'60g',c:9},{n:'野菜スープ',a:'1杯',c:40},{n:'ノンオイルドレッシング',a:'大さじ2',c:20}],
+   nt:'ツナ水煮缶は高タンパク・低脂質。わかめは食物繊維が豊富でむくみ改善にも◎'},
+  {name:'えびとブロッコリーの炒め定食',cal:468,p:28,f:12,ca:55,
+   ig:[{n:'むきえび',a:'100g',c:91},{n:'ブロッコリー',a:'120g',c:40},{n:'ご飯（白米）',a:'150g',c:252},{n:'にんにく・オリーブ油',a:'適量',c:50},{n:'味噌汁',a:'1杯',c:35}],
+   nt:'えびは低カロリー高タンパク。ブロッコリーのビタミンCが免疫力をサポート✊'},
+  {name:'ささみと野菜の塩炒め定食',cal:502,p:38,f:10,ca:58,
+   ig:[{n:'鶏ささみ',a:'120g（3本）',c:118},{n:'キャベツ・もやし・にんじん',a:'200g',c:52},{n:'ご飯（白米）',a:'150g',c:252},{n:'ごま油・塩こしょう',a:'適量',c:45},{n:'味噌汁',a:'1杯',c:35}],
+   nt:'ささみは最も低脂質の鶏肉。片栗粉をまぶして炒めるとパサつかない✨'},
+  {name:'まぐろ丼＋わかめ味噌汁＋小鉢',cal:528,p:32,f:8,ca:72,
+   ig:[{n:'まぐろ赤身',a:'120g',c:150},{n:'ご飯（白米）',a:'170g',c:285},{n:'わかめ味噌汁',a:'1杯',c:45},{n:'ひじき小鉢',a:'50g',c:35},{n:'わさび・醤油',a:'少々',c:13}],
+   nt:'まぐろ赤身はDHA・EPA・タンパク質が豊富。刺身は調理なしで栄養をそのまま摂れる✨'},
+  {name:'肉野菜炒め定食',cal:460,p:24,f:15,ca:55,
+   ig:[{n:'豚もも薄切り',a:'100g',c:128},{n:'キャベツ・もやし・ピーマン',a:'200g',c:50},{n:'ご飯（白米）',a:'130g',c:218},{n:'ごま油・醤油・にんにく',a:'適量',c:50},{n:'お吸い物',a:'1杯',c:25}],
+   nt:'野菜を先に炒めてから肉を加えると野菜の食感が保てる。もやしでボリュームUP✊'},
+  {name:'塩麹鶏定食',cal:468,p:35,f:10,ca:52,
+   ig:[{n:'鶏むね肉（塩麹漬け）',a:'120g',c:150},{n:'ご飯（白米）',a:'130g',c:218},{n:'ほうれん草のお浸し',a:'80g',c:16},{n:'なめこの味噌汁',a:'1杯',c:40},{n:'漬物',a:'少々',c:10}],
+   nt:'塩麹で酵素の働きにより肉が柔らかくなる。冷蔵庫で一晩漬けるのがベスト✊'},
+  {name:'豚の生姜焼き定食',cal:548,p:30,f:18,ca:62,
+   ig:[{n:'豚もも薄切り',a:'120g',c:154},{n:'ご飯（白米）',a:'150g',c:252},{n:'千切りキャベツ',a:'100g',c:23},{n:'生姜・醤油・みりん（たれ）',a:'適量',c:50},{n:'味噌汁',a:'1杯',c:35}],
+   nt:'豚肉のビタミンB1が糖質の代謝を助ける。生姜は代謝アップ効果あり✊'},
+  {name:'鯖の味噌煮定食',cal:535,p:28,f:20,ca:55,
+   ig:[{n:'さば（切り身）',a:'100g',c:211},{n:'ご飯（白米）',a:'150g',c:252},{n:'大根・生姜',a:'60g',c:12},{n:'味噌・みりん・砂糖（たれ）',a:'適量',c:45},{n:'汁物',a:'1杯',c:35}],
+   nt:'さばの脂はDHA・EPAが豊富。血中中性脂肪を下げる効果あり。皮も一緒に食べて✨'},
+  {name:'鶏南蛮定食（ノンフライ）',cal:542,p:36,f:14,ca:60,
+   ig:[{n:'鶏むね肉（皮なし）',a:'120g',c:130},{n:'ご飯（白米）',a:'150g',c:252},{n:'南蛮酢（酢・砂糖・醤油）',a:'適量',c:40},{n:'玉ねぎ・パプリカ',a:'80g',c:22},{n:'汁物',a:'1杯',c:35}],
+   nt:'揚げずにオーブンまたはフライパンで焼いてから南蛮酢に漬ける。酢の力で消化を促進✊'},
+  {name:'豆腐チャンプルー定食',cal:512,p:26,f:16,ca:58,
+   ig:[{n:'木綿豆腐',a:'150g',c:108},{n:'豚もも薄切り',a:'60g',c:77},{n:'ゴーヤ・にんじん',a:'100g',c:25},{n:'卵',a:'1個（50g）',c:76},{n:'ご飯（白米）',a:'130g',c:218},{n:'鰹だし・塩・醤油',a:'適量',c:20}],
+   nt:'ゴーヤのビタミンCは熱に強い。沖縄料理の定番で栄養バランスが優秀✨'},
+  {name:'あじの塩焼き定食',cal:488,p:28,f:15,ca:52,
+   ig:[{n:'あじ（1尾）',a:'100g',c:126},{n:'ご飯（白米）',a:'150g',c:252},{n:'大根おろし',a:'50g',c:9},{n:'ほうれん草お浸し',a:'80g',c:16},{n:'味噌汁',a:'1杯',c:35}],
+   nt:'あじはDHA・EPAに加え、骨まで食べると食物繊維もカルシウムも摂れる✊'},
+  {name:'牛赤身ステーキ＋野菜＋ご飯',cal:552,p:36,f:18,ca:56,
+   ig:[{n:'牛もも赤身肉',a:'100g',c:167},{n:'ご飯（白米）',a:'150g',c:252},{n:'ブロッコリー・パプリカ・トマト',a:'150g',c:50},{n:'醤油・にんにく',a:'適量',c:22}],
+   nt:'牛赤身肉は鉄分・亜鉛が豊富。脂身を除けば高タンパク・低脂質の優秀食材✊'},
+  {name:'いわしの蒲焼き丼',cal:520,p:26,f:16,ca:66,
+   ig:[{n:'いわし（缶詰・蒲焼き）',a:'1缶（100g）',c:188},{n:'ご飯（白米）',a:'150g',c:252},{n:'千切りキャベツ',a:'80g',c:18},{n:'汁物',a:'1杯',c:35}],
+   nt:'いわし缶はDHA・EPAが豊富でそのまま使えて時短。缶の煮汁もご飯にかけると栄養まるごと✨'},
+  {name:'鶏肉と舞茸の和風炒め定食',cal:514,p:30,f:12,ca:62,
+   ig:[{n:'鶏もも肉（皮なし）',a:'100g',c:127},{n:'舞茸・しめじ',a:'100g',c:18},{n:'ご飯（白米）',a:'150g',c:252},{n:'醤油・みりん・ごま油',a:'各少々',c:45},{n:'汁物',a:'1杯',c:35}],
+   nt:'舞茸はβグルカン・MXフラクションが豊富で免疫力と代謝を高める✊'},
+  {name:'ひじき入り豆腐ハンバーグ定食',cal:495,p:28,f:14,ca:55,
+   ig:[{n:'鶏ひき肉',a:'80g',c:110},{n:'木綿豆腐',a:'100g',c:72},{n:'ひじき（戻し）',a:'30g',c:16},{n:'ご飯（白米）',a:'150g',c:252},{n:'汁物',a:'1杯',c:35}],
+   nt:'ひじきは鉄分・カルシウムが豊富。豆腐で腹持ちを保ちながらカロリーを抑える✨'},
+  {name:'鮭と野菜のちゃんちゃん焼き定食',cal:530,p:30,f:16,ca:58,
+   ig:[{n:'鮭（切り身）',a:'100g',c:133},{n:'キャベツ・もやし・にんじん',a:'150g',c:38},{n:'ご飯（白米）',a:'150g',c:252},{n:'味噌・バター・みりん',a:'適量',c:50}],
+   nt:'北海道の郷土料理。フライパンでホイル包み蒸し焼きにすると簡単で洗い物も少なく◎✊'},
+  {name:'たら鍋定食（ご飯付き）',cal:480,p:32,f:8,ca:62,
+   ig:[{n:'たら（切り身）',a:'100g',c:77},{n:'豆腐',a:'100g',c:72},{n:'白菜・えのき',a:'150g',c:30},{n:'ご飯（白米）',a:'150g',c:252},{n:'だし・醤油・みりん',a:'適量',c:30}],
+   nt:'たらは高タンパク・超低脂質の白身魚。旬の冬は特に美味。消化がよく腸にも優しい✨'},
+  {name:'厚揚げと野菜の煮物定食',cal:476,p:24,f:14,ca:60,
+   ig:[{n:'厚揚げ',a:'100g',c:143},{n:'ごぼう・にんじん・こんにゃく',a:'150g',c:55},{n:'ご飯（白米）',a:'150g',c:252},{n:'だし・醤油・みりん',a:'適量',c:30}],
+   nt:'厚揚げは豆腐より高タンパク。ごぼうの食物繊維で腸活効果も◎作り置き可能✊'},
+  {name:'冷しゃぶ定食（夏向け）',cal:495,p:28,f:14,ca:58,
+   ig:[{n:'豚もも薄切り',a:'100g',c:128},{n:'ご飯（白米）',a:'150g',c:252},{n:'レタス・きゅうり・トマト',a:'120g',c:25},{n:'ポン酢・ごま',a:'大さじ2',c:35}],
+   nt:'茹でた豚肉を冷水でしめると余分な脂が落ちる。夏の食欲がない日でも食べやすい✨'},
+],
+dinner:[
+  {name:'ささみ梅じそ焼き＋野菜小鉢＋汁物',cal:179,p:22,f:4,ca:8,
+   ig:[{n:'鶏ささみ',a:'100g',c:98},{n:'梅・しそ',a:'各適量',c:10},{n:'ほうれん草のお浸し',a:'80g',c:16},{n:'ブロッコリー温野菜',a:'100g',c:35},{n:'お吸い物',a:'1杯',c:20}],
+   nt:'筋を取り観音開きにすると火が通りやすい。梅じそで塩分を抑えながら風味UP✨'},
+  {name:'さば塩焼き＋ほうれん草＋ご飯少量',cal:397,p:25,f:17,ca:35,
+   ig:[{n:'さば（切り身）',a:'80g',c:169},{n:'ほうれん草のお浸し',a:'80g',c:16},{n:'ご飯（白米）',a:'100g',c:168},{n:'大根おろし',a:'50g',c:9},{n:'味噌汁',a:'1杯',c:35}],
+   nt:'さばはDHA・EPAが豊富で中性脂肪を下げる効果あり。大根おろしが消化を助ける'},
+  {name:'キムチ鍋（豚・豆腐・野菜）',cal:289,p:22,f:10,ca:15,
+   ig:[{n:'豚もも薄切り',a:'80g',c:102},{n:'木綿豆腐',a:'100g',c:72},{n:'キャベツ・きのこ・ねぎ',a:'200g',c:60},{n:'キムチ',a:'50g',c:30},{n:'だし・醤油',a:'適量',c:25}],
+   nt:'キムチの乳酸菌で腸活にも効果的。豚肉のビタミンB1が糖質の代謝を助ける✊'},
+  {name:'蒸し鶏バンバンジー風',cal:186,p:20,f:8,ca:5,
+   ig:[{n:'鶏むね肉（皮なし）',a:'100g',c:108},{n:'きゅうり',a:'100g',c:14},{n:'ごまだれ',a:'大さじ1',c:50},{n:'もやし（茹で）',a:'100g',c:14}],
+   nt:'電子レンジで蒸すと時短&低カロリー。ごまだれはタンパク質補給にも◎'},
+  {name:'水炊き鍋（鶏・豆腐・野菜）',cal:285,p:25,f:10,ca:10,
+   ig:[{n:'鶏もも肉（皮なし）',a:'100g',c:127},{n:'木綿豆腐',a:'100g',c:72},{n:'白菜・ねぎ・春菊',a:'200g',c:50},{n:'しめじ',a:'50g',c:8},{n:'ポン酢',a:'大さじ2',c:30}],
+   nt:'水炊きは余分な脂が汁に落ちるのでヘルシー。ポン酢は低カロリーで酸味が食欲を整える✊'},
+  {name:'鶏ホイル焼き＋野菜スープ',cal:314,p:22,f:12,ca:20,
+   ig:[{n:'鶏もも肉（皮なし）',a:'100g',c:127},{n:'玉ねぎ・パプリカ・きのこ',a:'150g',c:55},{n:'バター',a:'5g',c:37},{n:'野菜スープ（具だくさん）',a:'1杯',c:80},{n:'塩・こしょう・酒',a:'適量',c:15}],
+   nt:'ホイル焼きは蒸し焼きになるので水分・栄養が逃げない。バターは風味付け程度に'},
+  {name:'豚しゃぶポン酢＋野菜たっぷり',cal:205,p:20,f:8,ca:8,
+   ig:[{n:'豚もも薄切り',a:'100g',c:128},{n:'レタス・水菜・きゅうり',a:'150g',c:30},{n:'ポン酢',a:'大さじ2',c:30},{n:'もやし（茹で）',a:'100g',c:14},{n:'ごま',a:'小さじ1',c:19}],
+   nt:'熱湯で30秒程度茹でるのがコツ。ポン酢ベースで脂質ほぼゼロの最強ヘルシーメニュー✨'},
+  {name:'鮭のホイル焼き＋野菜炒め',cal:409,p:22,f:14,ca:42,
+   ig:[{n:'鮭（切り身）',a:'80g',c:106},{n:'きのこ（まいたけ・しめじ）',a:'100g',c:20},{n:'ブロッコリー・パプリカ',a:'150g',c:60},{n:'ご飯（白米）',a:'130g',c:218},{n:'酒・塩・バター',a:'少々',c:25}],
+   nt:'まいたけのMXフラクションは代謝を助ける効果あり✨'},
+  {name:'えびと野菜の中華炒め',cal:386,p:22,f:12,ca:40,
+   ig:[{n:'むきえび',a:'100g',c:91},{n:'ブロッコリー・きくらげ',a:'150g',c:50},{n:'ご飯（白米）',a:'100g',c:168},{n:'オイスターソース・醤油',a:'適量',c:40},{n:'ごま油',a:'小さじ1',c:37}],
+   nt:'えびのタウリンは代謝を高める効果あり。きくらげは鉄分豊富で貧血対策にも◎'},
+  {name:'豆腐と野菜の煮物',cal:198,p:10,f:6,ca:15,
+   ig:[{n:'木綿豆腐',a:'150g',c:108},{n:'大根・にんじん',a:'150g',c:45},{n:'こんにゃく',a:'100g',c:5},{n:'だし・醤油・みりん',a:'適量',c:40}],
+   nt:'こんにゃくはほぼゼロカロリーで満腹感を出すのに最適。作り置きOK✊'},
+  {name:'ポトフ（鶏・野菜たっぷり）',cal:267,p:18,f:5,ca:30,
+   ig:[{n:'鶏むね肉',a:'100g',c:108},{n:'じゃがいも',a:'100g',c:76},{n:'にんじん・玉ねぎ・セロリ',a:'200g',c:60},{n:'キャベツ',a:'100g',c:23},{n:'コンソメ・塩こしょう',a:'適量',c:20}],
+   nt:'じゃがいものビタミンCは熱に強い。煮込むほど野菜の旨みが増す✨'},
+  {name:'鶏むね塩こうじ焼き＋サラダ',cal:356,p:30,f:10,ca:30,
+   ig:[{n:'鶏むね肉（塩こうじ漬け）',a:'120g',c:138},{n:'レタス・トマト・きゅうり',a:'150g',c:30},{n:'ノンオイルドレッシング',a:'大さじ2',c:20},{n:'ご飯（白米）',a:'100g',c:168}],
+   nt:'塩こうじ酵素でタンパク質が分解されて消化吸収がよくなる✊'},
+  {name:'鶏むね肉の梅肉和え＋野菜小鉢2品',cal:248,p:28,f:5,ca:15,
+   ig:[{n:'鶏むね肉（皮なし）',a:'100g',c:108},{n:'梅肉',a:'大さじ1',c:20},{n:'ほうれん草お浸し',a:'80g',c:16},{n:'ブロッコリー温野菜',a:'100g',c:35}],
+   nt:'梅肉はクエン酸が豊富で疲労回復効果あり。シンプルで糖質をほぼ含まない夕食✊'},
+  {name:'白身魚の煮付け＋野菜小鉢',cal:263,p:26,f:6,ca:15,
+   ig:[{n:'たら（切り身）',a:'100g',c:77},{n:'大根',a:'100g',c:18},{n:'ほうれん草お浸し',a:'80g',c:16},{n:'きのこ',a:'50g',c:8},{n:'だし・醤油・みりん',a:'適量',c:30}],
+   nt:'たらは100gあたりたんぱく質約17g・脂質約1gの優秀白身魚。煮汁は大根に染み込ませて✊'},
+  {name:'鯛の塩焼き＋野菜たっぷり',cal:283,p:28,f:8,ca:8,
+   ig:[{n:'鯛（切り身）',a:'100g',c:177},{n:'ブロッコリー',a:'100g',c:33},{n:'きのこ（まいたけ等）',a:'80g',c:15},{n:'大根おろし',a:'50g',c:9}],
+   nt:'鯛は消化がよく良質なタンパク質が豊富。塩焼きは最もシンプルで栄養を逃さない調理法✨'},
+  {name:'蒸しえびと野菜のサラダ仕立て',cal:213,p:22,f:5,ca:12,
+   ig:[{n:'むきえび',a:'100g',c:91},{n:'アボカド',a:'1/4個（40g）',c:64},{n:'レタス・水菜・トマト',a:'150g',c:32},{n:'ノンオイルドレッシング',a:'大さじ2',c:20}],
+   nt:'えびのタウリンで肝機能サポート。アボカドの良質脂肪酸で満腹感が長続き✨'},
+  {name:'あじのたたき＋野菜',cal:231,p:24,f:8,ca:8,
+   ig:[{n:'あじ（刺身用）',a:'100g',c:126},{n:'大葉・生姜・ねぎ',a:'各適量',c:10},{n:'きゅうり',a:'100g',c:14},{n:'ポン酢',a:'大さじ1',c:8}],
+   nt:'あじはDHA・EPA豊富。たたきにすることで消化がよくなる。夕食の糖質制限日に最適✊'},
+  {name:'豚ヒレ肉のソテー＋野菜スープ',cal:312,p:30,f:10,ca:18,
+   ig:[{n:'豚ヒレ肉',a:'100g',c:115},{n:'にんにく・オリーブ油',a:'各少々',c:40},{n:'野菜スープ（トマト・玉ねぎ・セロリ）',a:'1杯',c:70},{n:'塩・こしょう',a:'少々',c:5}],
+   nt:'豚ヒレは豚肉の中で最も低脂質・高タンパク。ビタミンB1でエネルギー代謝を助ける✊'},
+  {name:'麻婆豆腐（ご飯少量）',cal:352,p:20,f:15,ca:32,
+   ig:[{n:'木綿豆腐',a:'150g',c:108},{n:'豚ひき肉（脂身少）',a:'50g',c:72},{n:'ご飯（白米）',a:'100g',c:168},{n:'豆板醤・にんにく・生姜',a:'各適量',c:20}],
+   nt:'辛味の唐辛子成分カプサイシンに代謝促進効果あり。豆腐でタンパク質とイソフラボン補給✨'},
+  {name:'ぶり大根＋小鉢',cal:312,p:25,f:12,ca:20,
+   ig:[{n:'ぶり（切り身）',a:'80g',c:179},{n:'大根',a:'150g',c:27},{n:'ほうれん草お浸し',a:'80g',c:16},{n:'だし・醤油・みりん',a:'適量',c:40}],
+   nt:'ぶりはDHA・EPAが豊富。冬が旬で脂がのっている時期は特に栄養価が高い✊'},
+  {name:'いかと野菜の炒め物',cal:242,p:22,f:8,ca:14,
+   ig:[{n:'いか（胴）',a:'100g',c:88},{n:'ピーマン・パプリカ・玉ねぎ',a:'150g',c:42},{n:'ごま油・醤油・酒',a:'各少々',c:32}],
+   nt:'いかのタウリンは肝機能サポートと代謝促進効果あり。低カロリーで高タンパク✨'},
+  {name:'鶏むね肉と大根の和風煮',cal:264,p:30,f:5,ca:18,
+   ig:[{n:'鶏むね肉（皮なし）',a:'100g',c:108},{n:'大根',a:'200g',c:36},{n:'にんじん',a:'50g',c:19},{n:'だし・醤油・みりん',a:'適量',c:40}],
+   nt:'柔らかく煮た大根に鶏の旨みが染み込む。低脂質・低糖質で満腹感のある夕食✊'},
+  {name:'鮭と豆腐のチゲ風鍋',cal:302,p:30,f:12,ca:15,
+   ig:[{n:'鮭（切り身）',a:'80g',c:106},{n:'木綿豆腐',a:'100g',c:72},{n:'白菜・もやし',a:'150g',c:25},{n:'コチュジャン・だし・醤油',a:'各適量',c:30}],
+   nt:'韓国風の旨辛鍋。カプサイシンの代謝促進効果×鮭のオメガ3で最強の夕食に✨'},
+  {name:'牛赤身肉と野菜の炒め物',cal:322,p:25,f:14,ca:20,
+   ig:[{n:'牛もも赤身肉',a:'80g',c:134},{n:'もやし・ほうれん草',a:'150g',c:30},{n:'にんにく・ごま油・醤油',a:'各適量',c:38}],
+   nt:'牛赤身は鉄分・亜鉛が豊富。月経のある女性は特に意識して摂りたい食材✊'},
+  {name:'卵と豆腐の和風あんかけ',cal:238,p:18,f:10,ca:15,
+   ig:[{n:'絹豆腐',a:'150g',c:84},{n:'卵',a:'2個（100g）',c:152},{n:'だし・醤油・みりん（あん）',a:'適量',c:35}],
+   nt:'だしのうまみを活かしてやさしい味に。消化がよく夜遅い夕食にもおすすめ✨'},
+],
+snack:[
+  {name:'ゆで卵2個＋プロセスチーズ',cal:219,p:18,f:15,ca:2,
+   ig:[{n:'ゆで卵',a:'2個（100g）',c:151},{n:'プロセスチーズ',a:'1枚（20g）',c:68}],
+   nt:'タンパク質・脂質でしっかり満足感。血糖値を上げにくい最強おやつ✊'},
+  {name:'無糖ヨーグルト＋ミックスナッツ',cal:152,p:7,f:10,ca:10,
+   ig:[{n:'プレーンヨーグルト（無糖）',a:'100g',c:62},{n:'ミックスナッツ',a:'15g',c:90}],
+   nt:'乳酸菌＋食物繊維で腸活効果◎。ナッツは1日25g程度まで✨'},
+  {name:'バナナ1本＋ゆで卵1個',cal:162,p:8,f:5,ca:22,
+   ig:[{n:'バナナ',a:'100g',c:86},{n:'ゆで卵',a:'1個（50g）',c:76}],
+   nt:'運動後や午後の糖質補給に最適。バナナのカリウムはむくみ改善にも✨'},
+  {name:'豆乳（無調整）200ml',cal:92,p:6,f:4,ca:7,
+   ig:[{n:'豆乳（無調整）',a:'200ml',c:92}],
+   nt:'イソフラボンで女性ホルモンのバランスを整える効果あり✨'},
+  {name:'プロテインバー',cal:200,p:18,f:7,ca:20,
+   ig:[{n:'プロテインバー（市販）',a:'1本',c:200}],
+   nt:'糖質15g以下・タンパク質15g以上のものを選ぶと◎'},
+  {name:'さけるチーズ＋ゆで卵',cal:180,p:18,f:12,ca:2,
+   ig:[{n:'さけるチーズ',a:'2本（40g）',c:104},{n:'ゆで卵',a:'1個（50g）',c:76}],
+   nt:'さけるチーズはタンパク質豊富で腹持ち◎✨'},
+  {name:'めかぶ＋豆腐の小鉢',cal:70,p:6,f:3,ca:4,
+   ig:[{n:'めかぶ',a:'1パック（40g）',c:6},{n:'絹豆腐',a:'100g',c:56},{n:'醤油',a:'小さじ1',c:8}],
+   nt:'めかぶのフコイダンが腸の粘膜を守る効果あり。夕方の軽いおやつに✨'},
+  {name:'ミックスナッツ',cal:120,p:4,f:10,ca:5,
+   ig:[{n:'ミックスナッツ',a:'20g',c:120}],
+   nt:'不飽和脂肪酸が代謝を助ける。小袋で購入して食べすぎを防ぐのがおすすめ✊'},
+  {name:'プロテイン（豆乳割り）',cal:166,p:18,f:5,ca:10,
+   ig:[{n:'プロテイン',a:'30g（1杯）',c:120},{n:'豆乳（無調整）',a:'100ml',c:46}],
+   nt:'タンパク質を手軽に補給。豆乳で割るとイソフラボンも同時摂取できる✨'},
+  {name:'枝豆（冷凍）',cal:135,p:12,f:6,ca:8,
+   ig:[{n:'枝豆（冷凍・解凍）',a:'100g',c:135}],
+   nt:'食物繊維・鉄分・ビタミンB1が豊富。冷凍で手軽に食べられる優秀おつまみ系おやつ✊'},
+  {name:'小魚アーモンド',cal:158,p:10,f:10,ca:12,
+   ig:[{n:'小魚アーモンド（市販）',a:'25g',c:158}],
+   nt:'小魚でカルシウム・アーモンドでビタミンEと良質な脂肪酸を補給。食べ応えもある✨'},
+  {name:'ゆで卵1個＋昆布佃煮',cal:101,p:8,f:5,ca:5,
+   ig:[{n:'ゆで卵',a:'1個（50g）',c:76},{n:'昆布佃煮',a:'10g',c:25}],
+   nt:'ミニマムおやつ。昆布のヨウ素が甲状腺機能をサポート。食べすぎ注意（1日1食程度）✊'},
+  {name:'カッテージチーズ＋トマト',cal:112,p:12,f:4,ca:8,
+   ig:[{n:'カッテージチーズ',a:'60g',c:62},{n:'トマト',a:'100g',c:20},{n:'塩・黒こしょう',a:'少々',c:3}],
+   nt:'カッテージチーズは乳製品の中で最も低脂質・高タンパク。ダイエット中の罪悪感ゼロおやつ✨'},
+  {name:'するめ（あたりめ）',cal:108,p:22,f:1,ca:4,
+   ig:[{n:'するめ（あたりめ）',a:'30g',c:108}],
+   nt:'噛む回数が多いので少量で満足感大。タンパク質が豊富でカロリーが低い。塩分注意✊'},
+  {name:'きなこ豆乳',cal:148,p:10,f:6,ca:15,
+   ig:[{n:'豆乳（無調整）',a:'150ml',c:69},{n:'きなこ',a:'大さじ2（14g）',c:57},{n:'蜂蜜',a:'小さじ1（7g）',c:22}],
+   nt:'きなこのイソフラボン＋豆乳で女性ホルモンバランスをサポート。腸活にも効果的✨'},
+]
+};
+
+// ============================================================
+// 献立生成（スケーリング：cal＝食材合計の実際値）
+// ============================================================
+function generateMenu(){
+  const C=calc();
+  const ld=document.getElementById('menuLoading');
+  const res=document.getElementById('menuResult');
+  const ini=document.getElementById('menuInit');
+  ld.classList.remove('hidden');res.classList.add('hidden');ini.classList.add('hidden');
+
+  setTimeout(()=>{
+    function best(pool,targetCal,n){
+      var s=pool.slice().map(function(m){return Object.assign({},m,{d:Math.abs(m.cal-targetCal)});}).sort(function(a,b){return a.d-b.d;});
+      const out=[],used=new Set();
+      for(var fi=0;fi<s.length;fi++){if(out.length>=n)break;var fm=s[fi];if(!used.has(fm.name)){out.push(Object.assign({},fm));used.add(fm.name);}}
+      while(out.length<n){
+        const rem=pool.filter(m=>!used.has(m.name));
+        if(!rem.length)break;
+        const r=rem[Math.floor(Math.random()*rem.length)];
+        out.push(Object.assign({},r));used.add(r.name);
+      }
+      return [...out].sort(()=>Math.random()-.5);
+    }
+    const bfs=best(DB.breakfast,C.bf,7);
+    const lus=best(DB.lunch,C.lu,7);
+    const dis=best(DB.dinner,C.di,7);
+    const sns=best(DB.snack,C.sn,7);
+
+    WM=Array.from({length:7},function(_,i){return {
+      breakfast: scaleMeal(bfs[i]||DB.breakfast[i%DB.breakfast.length], C.bf),
+      lunch:     scaleMeal(lus[i]||DB.lunch[i%DB.lunch.length],         C.lu),
+      dinner:    scaleMeal(dis[i]||DB.dinner[i%DB.dinner.length],        C.di),
+      snack:     scaleMeal(sns[i]||DB.snack[i%DB.snack.length],          C.sn),
+    };
+    });
+    WM._genWeight=C.w; // 生成時の体重を記録（大きく変化したら再生成を促す）
+    save();
+    renderNCard(todayIdx());
+    renderWeekTabs();
+    selDay(todayIdx());
+    ld.classList.add('hidden');res.classList.remove('hidden');
+  },900);
+}
+
+// ★ 週平均・月平均の減量計算（前期間の平均体重 - 後期間の平均体重）
+// 直近N日の平均体重 ー その前のN日の平均体重（同期間同士を比較）
+function calcAvgLoss(days){
+  if(R.length<2)return null;
+  const now=Date.now();
+  const cutRecent=lds(new Date(now-days*86400000));        // N日前
+  const cutOlder =lds(new Date(now-days*2*86400000));      // 2N日前
+
+  const recent=R.filter(r=>r.date>cutRecent);             // 直近N日
+  const older =R.filter(r=>r.date>cutOlder&&r.date<=cutRecent); // その前のN日
+
+  if(!recent.length)return null;
+  const rAvg=recent.reduce((s,r)=>s+r.weight,0)/recent.length;
+
+  // 比較期間のデータがない場合は最古記録と比較
+  if(!older.length){
+    const oldest=R.slice().sort((a,b)=>a.date.localeCompare(b.date))[0];
+    if(oldest.date>=cutRecent)return null; // 全記録が直近N日以内
+    return +((oldest.weight-rAvg).toFixed(1));
+  }
+  const oAvg=older.reduce((s,r)=>s+r.weight,0)/older.length;
+  return +((oAvg-rAvg).toFixed(1));
+}
+
+// 停滞期判定：直近N日以内の記録が全て±threshold以内に収まっているか
+function detectPlateau(days=10, threshold=0.3){
+  const cut=lds(new Date(Date.now()-days*86400000));
+  const recent=R.filter(r=>r.date>cut);
+  if(recent.length<3)return null; // 記録が少なすぎる
+  var weights=recent.map(function(r){return r.weight;});
+  var max=weights.reduce(function(a,b){return a>b?a:b;});
+  var min=weights.reduce(function(a,b){return a<b?a:b;});
+  if(max-min<=threshold){
+    return{days:recent.length, avg:+(weights.reduce((s,w)=>s+w,0)/weights.length).toFixed(1)};
+  }
+  return null;
+}
+
+// ★ 黒枠カード：静的部分（PFC・総カロリー）＋ id付きmg4で曜日別に更新可能
+function renderNCard(dayIdx){
+  var C=calc();
+  var bf=C.bf,lu=C.lu,di=C.di,sn=C.sn,totLabel='目標配分';
+  if(WM&&dayIdx!=null&&WM[dayIdx]){
+    var dm2=WM[dayIdx];
+    bf=dm2.breakfast.cal; lu=dm2.lunch.cal; di=dm2.dinner.cal;
+    sn=dm2.snack?dm2.snack.cal:C.sn;
+    totLabel='この日の献立';
+  }
+  var dayNames=['月','火','水','木','金','土','日'];
+  var dayLabel=dayIdx!=null?dayNames[dayIdx]+'曜日':'';
+  var floorNote=C.floor?' ※'+C.minC+'kcalフロア':'';
+  var nc='';
+  nc+='<div class="ndl">1日の摂取目標カロリー（目安）</div>';
+  nc+='<div style="display:flex;align-items:baseline;gap:5px;margin-bottom:3px;">';
+  nc+='<span class="ndv">約'+C.dc.toLocaleString()+'</span><span class="ndu">kcal</span></div>';
+  nc+='<div class="nds">基礎代謝 '+C.bmr+' ／ 総消費 '+C.tdee+' ／ 減量ペース −'+S.deficit+'kcal'+floorNote+'</div>';
+  nc+='<div style="font-size:10px;color:rgba(250,247,242,.6);margin-bottom:10px;padding:5px 8px;background:rgba(255,255,255,.07);border-radius:6px;">';
+  nc+='📊 計算基準：現在の体重 <strong style="color:var(--al);">'+C.w+'kg</strong>（最新記録値）<br>';
+  nc+='<span style="font-size:9px;color:rgba(250,247,242,.4);">体重が減るたびに目標カロリーも自動で下がります</span></div>';
+  nc+='<div class="ndiv"></div>';
+  nc+='<div class="mg3" id="nCardMacros">';
+  nc+='<div class="ndmc"><div class="mv">'+C.prot+'<span>g</span></div><div class="ml">タンパク質</div><div class="mk">目標値 '+(C.prot*4)+'kcal</div></div>';
+  nc+='<div class="ndmc"><div class="mv">'+C.fat+'<span>g</span></div><div class="ml">脂質</div><div class="mk">目標値 '+(C.fat*9)+'kcal</div></div>';
+  nc+='<div class="ndmc"><div class="mv">'+C.carb+'<span>g</span></div><div class="ml">糖質</div><div class="mk">目標値 '+(C.carb*4)+'kcal</div></div>';
+  nc+='</div>';
+  nc+='<div style="font-size:9px;color:rgba(250,247,242,.4);margin-bottom:2px;margin-top:-4px;">▲ 目標値（体重ベース）</div>';
+  nc+='<div class="ndiv"></div>';
+  nc+='<div style="font-size:9px;color:rgba(250,247,242,.45);margin-bottom:5px;">'+totLabel+(dayLabel?'（'+dayLabel+'）':'')+'</div>';
+  nc+='<div class="mg4" id="nCardMeals">';
+  nc+='<div class="mmi"><div class="mmv">'+bf+'</div><div class="mml">朝食 kcal</div></div>';
+  nc+='<div class="mmi"><div class="mmv">'+lu+'</div><div class="mml">昼食 kcal</div></div>';
+  nc+='<div class="mmi"><div class="mmv">'+di+'</div><div class="mml">夕食 kcal</div></div>';
+  nc+='<div class="mmi"><div class="mmv">'+sn+'</div><div class="mml">間食 kcal</div></div>';
+  nc+='</div>';
+  nc+='<p style="font-size:9px;color:rgba(250,247,242,.3);margin-top:9px;">Mifflin-St Jeor式。除脂肪体重('+C.lbm+'kg)×1.8g/kg。食べる順：野菜→タンパク質→糖質</p>';
+  if(WM&&WM._genWeight&&Math.abs(WM._genWeight-C.w)>=2){
+    nc+='<div style="margin-top:10px;background:rgba(245,158,11,.15);border-radius:7px;padding:8px 10px;font-size:10px;color:rgba(250,247,242,.75);">';
+    nc+='⚠️ 献立生成時の体重（'+WM._genWeight+'kg）から'+Math.abs(WM._genWeight-C.w).toFixed(1)+'kg変化しています。<br>目標カロリーが更新されたため、献立の再生成を推奨します。</div>';
+  }
+  document.getElementById('nCard').innerHTML=nc;
+}
+
+// 曜日タブ切替時：カロリーボックスとPFC両方を実際の食事ベースで更新
+function updateNCardMeals(idx){
+  const C=calc();
+  const mealEl=document.getElementById('nCardMeals');
+  const macroEl=document.getElementById('nCardMacros');
+  if(!mealEl||!macroEl)return;
+
+  const dayNames=['月','火','水','木','金','土','日'];
+  let bf=C.bf,lu=C.lu,di=C.di,sn=C.sn;
+  let totP=null,totF=null,totCa=null;
+  let hasReal=false;
+
+  if(WM&&WM[idx]){
+    const m=WM[idx];
+    bf=m.breakfast.cal; lu=m.lunch.cal;
+    di=m.dinner.cal; sn=m.snack?m.snack.cal:C.sn;
+
+    // 全4食のPFCを合計（データがある食事のみ）
+    const meals=[m.breakfast, m.lunch, m.dinner, m.snack].filter(Boolean);
+    const hasMacros=meals.every(x=>x.p!=null&&x.f!=null&&x.ca!=null);
+    if(hasMacros){
+      totP=meals.reduce((s,x)=>s+(x.p||0),0);
+      totF=meals.reduce((s,x)=>s+(x.f||0),0);
+      totCa=meals.reduce((s,x)=>s+(x.ca||0),0);
+      hasReal=true;
+    }
+  }
+
+  // カロリーボックス更新
+  mealEl.innerHTML=
+    '<div class="mmi"><div class="mmv">'+bf+'</div><div class="mml">朝食 kcal</div></div>'+
+    '<div class="mmi"><div class="mmv">'+lu+'</div><div class="mml">昼食 kcal</div></div>'+
+    '<div class="mmi"><div class="mmv">'+di+'</div><div class="mml">夕食 kcal</div></div>'+
+    '<div class="mmi"><div class="mmv">'+sn+'</div><div class="mml">間食 kcal</div></div>';
+
+  // PFCボックス更新：実際値のみ（差分比較は表示しない）
+  if(hasReal){
+    var mr='';
+    mr+='<div class="ndmc"><div class="mv">'+totP+'<span>g</span></div><div class="ml">タンパク質</div><div class="mk">'+Math.round(totP*4)+'kcal</div></div>';
+    mr+='<div class="ndmc"><div class="mv">'+totF+'<span>g</span></div><div class="ml">脂質</div><div class="mk">'+Math.round(totF*9)+'kcal</div></div>';
+    mr+='<div class="ndmc"><div class="mv">'+totCa+'<span>g</span></div><div class="ml">糖質</div><div class="mk">'+Math.round(totCa*4)+'kcal</div></div>';
+    macroEl.innerHTML=mr;
+    const lbl=document.querySelector('#nCard [style*="rgba(250,247,242,.4)"]');
+    if(lbl)lbl.textContent='▲ '+dayNames[idx]+'曜日の推定摂取量';
+  } else {
+    // マクロデータなし→目標値表示
+    macroEl.innerHTML=
+      '<div class="ndmc"><div class="mv">'+C.prot+'<span>g</span></div><div class="ml">タンパク質</div><div class="mk">目標値</div></div>'+
+      '<div class="ndmc"><div class="mv">'+C.fat+'<span>g</span></div><div class="ml">脂質</div><div class="mk">目標値</div></div>'+
+      '<div class="ndmc"><div class="mv">'+C.carb+'<span>g</span></div><div class="ml">糖質</div><div class="mk">目標値</div></div>';
+  }
+  // 曜日ラベル更新
+  const dayLbl=document.querySelector('#nCard [style*="rgba(250,247,242,.45)"]');
+  if(dayLbl)dayLbl.textContent='この日の献立（'+dayNames[idx]+'曜日）';
+}
+
+function renderWeekTabs(){
+  const ti=todayIdx();
+  const days=['月','火','水','木','金','土','日'];
+  document.getElementById('weekTabs').innerHTML=days.map((d,i)=>{
+    const cls=i===ti?'tb today-tab':'tb';
+    var label=i===ti?d+'（今日）':d;
+    return'<button class="'+cls+'" onclick="selDay('+i+')">'+label+'</button>';
+  }).join('');
+}
+
+function selDay(idx){
+  if(!WM)return;
+  const C=calc();
+  const m=WM[idx];
+  const tot=m.breakfast.cal+m.lunch.cal+m.dinner.cal+(m.snack?m.snack.cal:0);
+  const diff=tot-C.dc;
+  var dTxt=(diff>=0?'+':'')+diff;
+  const dCol=Math.abs(diff)<=120?'var(--ok)':'var(--wb)';
+  const badge=(meal)=>meal._scaled?'<span class="sbadge">食材増量</span>':'';
+
+  // ★ 黒枠カードの食事配分ボックスをこの曜日の実際値に更新
+  updateNCardMeals(idx);
+
+  var dm='';
+  dm+='<div class="card" style="border-left-color:#F59E0B;">';
+  dm+='<div class="msh"><span class="mst">🌅 朝食</span><span class="mstg">目標 '+C.bf+'kcal</span></div>';
+  dm+='<div class="mi" onclick="openRM('+idx+',&quot;breakfast&quot;)">';
+  dm+='<span class="mn">'+m.breakfast.name+badge(m.breakfast)+'</span>';
+  dm+='<div class="mr2"><span class="mc2">'+m.breakfast.cal+'cal</span><span style="font-size:13px;color:var(--md);">📋</span></div></div></div>';
+
+  dm+='<div class="card" style="border-left-color:var(--bl);">';
+  dm+='<div class="msh"><span class="mst">☀️ 昼食</span><span class="mstg">目標 '+C.lu+'kcal</span></div>';
+  dm+='<div class="mi" onclick="openRM('+idx+',&quot;lunch&quot;)">';
+  dm+='<span class="mn">'+m.lunch.name+badge(m.lunch)+'</span>';
+  dm+='<div class="mr2"><span class="mc2">'+m.lunch.cal+'cal</span><span style="font-size:13px;color:var(--md);">📋</span></div></div></div>';
+
+  dm+='<div class="card" style="border-left-color:var(--ok);">';
+  dm+='<div class="msh"><span class="mst">🌙 夕食</span><span class="mstg">目標 '+C.di+'kcal</span></div>';
+  dm+='<div class="mi" onclick="openRM('+idx+',&quot;dinner&quot;)">';
+  dm+='<span class="mn">'+m.dinner.name+badge(m.dinner)+'</span>';
+  dm+='<div class="mr2"><span class="mc2">'+m.dinner.cal+'cal</span><span style="font-size:13px;color:var(--md);">📋</span></div></div></div>';
+
+  dm+='<div class="card" style="border-left-color:#A78BFA;">';
+  dm+='<div class="msh"><span class="mst">🍫 間食</span><span class="mstg">目標 '+C.sn+'kcal</span></div>';
+  dm+='<div class="mi" onclick="openRM('+idx+',&quot;snack&quot;)">';
+  dm+='<span class="mn">'+m.snack.name+badge(m.snack)+'</span>';
+  dm+='<div class="mr2"><span class="mc2">'+m.snack.cal+'cal</span><span style="font-size:13px;color:var(--md);">📋</span></div></div></div>';
+
+  dm+='<div class="dt"><span>1日合計</span>';
+  dm+='<span>'+tot+'kcal <span class="dd" style="color:'+dCol+';">（目標'+C.dc+'kcal｜差'+dTxt+'）</span></span></div>';
+  dm+='<div class="tp" style="margin-top:10px;font-size:11px;">📋 タップするとレシピ・食材量を確認できます</div>';
+  document.getElementById('dayMenu').innerHTML=dm;
+  document.querySelectorAll('.tb').forEach((b,i)=>b.classList.toggle('active',i===idx));
+}
+
+function renderMS(){
+  renderNCard(WM?todayIdx():null);
+  if(WM){
+    document.getElementById('menuResult').classList.remove('hidden');
+    document.getElementById('menuInit').classList.add('hidden');
+    renderWeekTabs();
+    selDay(todayIdx());
+  } else {
+    document.getElementById('menuResult').classList.add('hidden');
+    document.getElementById('menuInit').classList.remove('hidden');
+  }
+}
+
+// ============================================================
+// レシピモーダル
+// ============================================================
+const MTL={breakfast:'🌅 朝食',lunch:'☀️ 昼食',dinner:'🌙 夕食',snack:'🍫 間食'};
+function openRM(dayIdx,type){
+  if(!WM||!WM[dayIdx])return;
+  const meal=WM[dayIdx][type];if(!meal)return;
+  document.getElementById('rmTitle').textContent=meal.name;
+  const C=calc();
+  const tgt={breakfast:C.bf,lunch:C.lu,dinner:C.di,snack:C.sn}[type]||0;
+  document.getElementById('rmType').innerHTML=(MTL[type]||type)+(meal._scaled?'　<span class="sbadge">目標カロリーに合わせて食材量を調整済</span>':'');
+  if(meal.ig&&meal.ig.length){
+    document.getElementById('rmBody').innerHTML=meal.ig.map(function(i){
+      return '<tr><td>'+i.n+'</td><td style="color:var(--md);">'+i.a+'</td><td style="font-weight:700;text-align:right;">'+i.c+'kcal</td></tr>';
+    }).join('');
+  } else {
+    document.getElementById('rmBody').innerHTML='<tr><td colspan="3" style="color:var(--md);text-align:center;padding:11px;">食材データなし</td></tr>';
+  }
+  document.getElementById('rmTotal').textContent=meal.cal+'kcal';
+  document.getElementById('rmNote').innerHTML=meal.nt?('💡 '+meal.nt):'';
+  // カロリーと食材の整合性説明
+  const igSum=meal.ig?meal.ig.reduce((s,i)=>s+i.c,0):meal.cal;
+  document.getElementById('rmCalNote').innerHTML='<strong>食材合計：'+igSum+'kcal</strong>　目標：'+tgt+'kcal<br>※ 調味料・少々表記の食材は個人差があります。';
+  document.getElementById('rModal').classList.add('active');
+}
+function closeRM(){document.getElementById('rModal').classList.remove('active');}
+
+// ============================================================
+// 設定
+// ============================================================
+
+// ============================================================
+// ② 生理周期フェーズバナー
+// ============================================================
+function renderMenstrualBanner(){
+  var el=document.getElementById('menstrualBanner');
+  if(!el){return;}
+  if(S.gender!=='female'||!S.periodDate){el.innerHTML='';return;}
+  var start=new Date(S.periodDate+'T00:00:00');
+  var now=new Date();now.setHours(0,0,0,0);
+  var daysSince=Math.floor((now-start)/86400000);
+  var cycleLen=S.cycleLen||28;
+  var phase=((daysSince%cycleLen)+cycleLen)%cycleLen;
+  var lutealStart=cycleLen-14;
+  var periodDays=5;
+  if(S.periodEnd){
+    var endD=new Date(S.periodEnd+'T00:00:00');
+    periodDays=Math.max(1,Math.floor((endD-start)/86400000)+1);
+  }
+  var cycleDay=phase+1;
+  var html='';
+  if(phase<periodDays){
+    var remaining=periodDays-phase;
+    html='<div style="background:#FDF2F8;border-left:4px solid #F472B6;border-radius:9px;padding:12px 14px;margin-bottom:13px;">';
+    html+='<div style="font-size:13px;font-weight:700;color:#BE185D;margin-bottom:5px;">🌸 生理中（'+cycleDay+'日目）</div>';
+    html+='<p style="font-size:12px;color:#9D174D;line-height:1.7;">生理が終わると水分が抜けて体重が減りやすくなります。今は鉄分・タンパク質を意識して摂って✨</p>';
+    html+='<button onclick="setTodayAsPeriodEnd()" style="margin-top:8px;padding:7px 12px;background:rgba(244,114,182,.15);border:1px solid #F472B6;border-radius:7px;font-size:11px;font-family:inherit;cursor:pointer;color:#BE185D;">✅ 今日で生理が終わった</button> ';
+    html+='<button onclick="setTodayAsPeriodStart()" style="margin-top:6px;padding:7px 12px;background:rgba(244,114,182,.08);border:1px solid #F472B6;border-radius:7px;font-size:11px;font-family:inherit;cursor:pointer;color:#BE185D;">🔄 開始日を修正</button>';
+    html+='</div>';
+  } else if(phase>=periodDays&&phase<lutealStart){
+    html='<div style="background:#F0FDF4;border-left:4px solid #4ADE80;border-radius:9px;padding:12px 14px;margin-bottom:13px;">';
+    html+='<div style="font-size:13px;font-weight:700;color:#166534;margin-bottom:5px;">✨ 卵胞期（周期'+cycleDay+'日目・最も痩せやすい時期）</div>';
+    html+='<p style="font-size:12px;color:#166534;line-height:1.7;">エストロゲンが上昇し代謝が上がりやすい時期です。食事管理の効果が出やすい黄金期✊</p>';
+    html+='</div>';
+  } else {
+    var daysToNext=cycleLen-phase;
+    html='<div style="background:#FDF2F8;border-left:4px solid #C084FC;border-radius:9px;padding:12px 14px;margin-bottom:13px;">';
+    html+='<div style="font-size:13px;font-weight:700;color:#7C3AED;margin-bottom:5px;">🌸 黄体期（約'+daysToNext+'日後に生理予定）</div>';
+    html+='<p style="font-size:12px;color:#6D28D9;line-height:1.7;">水分が溜まりやすく体重が増えやすい時期です。脂肪が増えたわけではありません。塩分を控えて水をしっかり飲んで✊</p>';
+    html+='<button onclick="setTodayAsPeriodStart()" style="margin-top:8px;padding:7px 12px;background:rgba(192,132,252,.15);border:1px solid #C084FC;border-radius:7px;font-size:11px;font-family:inherit;cursor:pointer;color:#7C3AED;">🌸 今日から生理が始まった</button>';
+    html+='</div>';
+  }
+  el.innerHTML=html;
+}
+
+function setTodayAsPeriodStart(){
+  S.periodDate=tds();
+  S.periodEnd=null; // 新しい周期開始なので終了日リセット
+  save();
+  const pdEl=document.getElementById('sLastPeriodDate');
+  if(pdEl)pdEl.value=S.periodDate;
+  const peEl=document.getElementById('sPeriodEndDate');
+  if(peEl)peEl.value='';
+  renderMenstrualBanner();
+  toast('🌸 生理開始日を今日に記録しました','ok');
+}
+
+function setTodayAsPeriodEnd(){
+  S.periodEnd=tds();
+  save();
+  const peEl=document.getElementById('sPeriodEndDate');
+  if(peEl)peEl.value=S.periodEnd;
+  renderMenstrualBanner();
+  toast('✅ 生理終了日を今日に記録しました','ok');
+}
+
+// カレンダーで日付を変えたら即座に保存・反映
+function onPeriodDateChange(){
+  const el=document.getElementById('sLastPeriodDate');
+  if(el&&el.value){
+    S.periodDate=el.value;
+    S.periodEnd=null;
+    const peEl=document.getElementById('sPeriodEndDate');
+    if(peEl)peEl.value='';
+    save();
+    renderMenstrualBanner();
+  }
+}
+function onPeriodEndDateChange(){
+  const el=document.getElementById('sPeriodEndDate');
+  if(el){
+    S.periodEnd=el.value||null;
+    save();
+    renderMenstrualBanner();
+  }
+}
+
+// ============================================================
+// ④ 週次レポート
+// ============================================================
+function renderWeeklyReport(){
+  const el=document.getElementById('weeklyReport');
+  if(!el||R.length<2){if(el)el.innerHTML='';return;}
+  const today=new Date();
+  const dow=today.getDay();
+  const mondayOffset=dow===0?6:dow-1;
+  const thisMonday=new Date(today);thisMonday.setDate(today.getDate()-mondayOffset);
+  const tmStr=lds(thisMonday);
+  const thisWeekRecs=R.filter(r=>r.date>=tmStr);
+  const thisWeekAvg=thisWeekRecs.length?+(thisWeekRecs.reduce((s,r)=>s+r.weight,0)/thisWeekRecs.length).toFixed(1):null;
+  const recDays=thisWeekRecs.length;
+  const wL=calcAvgLoss(7);
+  var wHtml='';
+  wHtml+='<div style="background:var(--dk);border-radius:11px;padding:14px;margin-bottom:13px;color:var(--cr);">';
+  wHtml+='<div style="font-size:11px;color:rgba(250,247,242,.5);margin-bottom:8px;">📋 週次レポート（'+(today.getMonth()+1)+'/'+today.getDate()+'時点）</div>';
+  wHtml+='<div class="mg3">';
+  wHtml+='<div class="ndmc"><div class="mv" style="font-size:18px;">'+recDays+'<span>日</span></div><div class="ml">今週の記録</div></div>';
+  wHtml+='<div class="ndmc"><div class="mv" style="font-size:18px;">'+(thisWeekAvg?thisWeekAvg+'<span style="font-size:11px;">kg</span>':'−')+'</div><div class="ml">今週の平均</div></div>';
+  wHtml+='<div class="ndmc"><div class="mv" style="font-size:18px;">'+(wL!==null?(wL>=0?'−':'+')+Math.abs(wL).toFixed(1)+'<span style="font-size:11px;">kg</span>':'−')+'</div><div class="ml">先週比変化</div></div>';
+  wHtml+='</div>';
+  var wMsg='';
+  if(recDays===0){wMsg='今週はまだ記録がありません。毎日記録すると精度が上がります✊';}
+  else if(recDays<5){wMsg=recDays+'日記録済み。できれば毎日測ると平均の精度が上がります✊';}
+  else{wMsg='よく記録できています！この調子で続けよう✨';}
+  var wColor=recDays>=5?'color:rgba(107,158,110,.8)':'color:rgba(250,247,242,.5);';
+  wHtml+='<p style="font-size:11px;margin-top:8px;'+wColor+'">'+wMsg+'</p>';
+  wHtml+='</div>';
+  el.innerHTML=wHtml;
+}
+
+// ============================================================
+// 活動量の説明文（かおり式ボディメイクアプリ準拠・5段階）
+const ACT_DESC = {
+  '1.2':   { icon:'🛋️', label:'かなり低い', body:'ほぼ一日中座っている・完全在宅デスクワーク・運動習慣がまったくない方向け。消費カロリーが最も少ない状態です。' },
+  '1.375': { icon:'🪑', label:'低い',       body:'主にデスクワーク・週1〜2回の軽い運動（ウォーキング・ストレッチ程度）をしている方向け。在宅勤務で少し動く場合もこちら。' },
+  '1.55':  { icon:'🚶', label:'普通',       body:'週3〜5回の運動習慣がある・立ち仕事メイン・通勤で毎日30分以上歩く方向け。医療・介護・保育職などもこちらが目安。' },
+  '1.725': { icon:'🏃', label:'高い',       body:'週6〜7回の本格的な運動をしている・肉体労働が中心の仕事の方向け。トレーナーや建設・農業従事者など。' },
+  '1.9':   { icon:'💪', label:'かなり高い', body:'毎日2回以上のトレーニング・アスリート・1日中重労働が続く仕事の方向け。一般的なダイエット目的の方にはほぼ該当しません。' }
+};
+
+function updateActDesc(){
+  const el=document.getElementById('actDesc');
+  if(!el)return;
+  const checked=document.querySelector('input[name=act]:checked');
+  if(!checked){el.innerHTML='';return;}
+  const d=ACT_DESC[checked.value];
+  if(!d){el.innerHTML='';return;}
+  el.innerHTML='<strong>'+d.icon+' '+d.label+'（×'+checked.value+'）</strong><br>'+d.body;
+}
+
+function toggleMenstrual(){
+  var gChecked=document.querySelector('input[name=gender]:checked');var isFemale=gChecked?gChecked.value==='female':false;
+  const sec=document.getElementById('menstrualSec');
+  if(sec)sec.style.display=isFemale?'block':'none';
+}
+
+function loadSUI(){
+  document.getElementById('sAge').value=S.age||'';
+  document.getElementById('sHt').value=S.height||'';
+  document.getElementById('sWt').value=S.weight||'';
+  document.getElementById('sTg').value=S.target||'';
+  var g=document.querySelector('input[name=gender][value="'+S.gender+'"]');if(g)g.checked=true;
+  // 旧3段階（1.375/1.55/1.725）から新5段階への互換処理
+  const actVal=String(S.activity);
+  var aEl=document.querySelector('input[name=act][value="'+actVal+'"]');
+  if(aEl){aEl.checked=true;}
+  else{
+    const vals=[1.2,1.375,1.55,1.725,1.9];
+    const nearest=vals.reduce((a,b)=>Math.abs(b-S.activity)<Math.abs(a-S.activity)?b:a);
+    var fb=document.querySelector('input[name=act][value="'+nearest+'"]');
+    if(fb)fb.checked=true;
+  }
+  var d=document.querySelector('input[name=def][value="'+S.deficit+'"]');if(d)d.checked=true;
+  if(document.getElementById('sLastPeriodDate')&&S.periodDate)document.getElementById('sLastPeriodDate').value=S.periodDate;
+  if(document.getElementById('sPeriodEndDate')&&S.periodEnd)document.getElementById('sPeriodEndDate').value=S.periodEnd;
+  updateActDesc();
+  toggleMenstrual();
+}
+function saveSettings(){
+  const age=parseInt(document.getElementById('sAge').value);
+  const ht=parseInt(document.getElementById('sHt').value);
+  const wt=parseFloat(document.getElementById('sWt').value);
+  const tg=parseFloat(document.getElementById('sTg').value);
+  if(!age||!ht||!wt||!tg){toast('すべての項目を入力してください','ng');return;}
+  if(age<15||age>80){toast('年齢は15〜80歳で入力してください','ng');return;}
+  if(ht<130||ht>220){toast('身長を正しく入力してください','ng');return;}
+  if(wt<20||wt>300){toast('体重を正しく入力してください','ng');return;}
+  if(tg>=wt){toast('目標体重は現在体重より低くしてください','ng');return;}
+  S.gender=document.querySelector('input[name=gender]:checked').value;
+  S.age=age;S.height=ht;S.weight=wt;S.target=tg;
+  S.activity=parseFloat(document.querySelector('input[name=act]:checked').value);
+  S.deficit=parseInt(document.querySelector('input[name=def]:checked').value);
+  // ② 生理周期設定を保存（女性のみ）
+  if(S.gender==='female'){
+    S.cycleLen=28; // 28日固定
+    const pdEl=document.getElementById('sLastPeriodDate');
+    if(pdEl&&pdEl.value)S.periodDate=pdEl.value;
+    const peEl=document.getElementById('sPeriodEndDate');
+    S.periodEnd=(peEl&&peEl.value)?peEl.value:null;
+  }
+  if(R.length===0)R.push({date:tds(),weight:wt});
+  save();toast('✅ 設定を保存しました！','ok');
+  goScreen('home');
+}
+// ============================================================
+// ① 停滞期インジケーター
+// ============================================================
+function renderPlateauAlert(){
+  const el=document.getElementById('plateauAlert');
+  if(!el)return;
+  if(R.length<5){el.innerHTML='';return;}
+  const sr=R.slice().sort((a,b)=>a.date.localeCompare(b.date));
+  const recent10=sr.slice(-10);
+  var maxW=recent10.reduce(function(mx,r){return r.weight>mx?r.weight:mx;},recent10[0].weight);
+  var minW=recent10.reduce(function(mn,r){return r.weight<mn?r.weight:mn;},recent10[0].weight);
+  const range=+(maxW-minW).toFixed(2);
+  // 直近10件のスパンが何日か
+  const spanDays=(new Date(recent10[recent10.length-1].date)-new Date(recent10[0].date))/(86400000);
+  if(range<=0.5&&spanDays>=7&&recent10.length>=5){
+    var pe='';
+    pe+='<div style="background:var(--wn);border-left:4px solid var(--wb);border-radius:9px;padding:13px 14px;margin-bottom:13px;">';
+    pe+='<div style="font-size:13px;font-weight:700;color:#92400E;margin-bottom:5px;">⚠️ 停滞期かもしれません</div>';
+    pe+='<div style="font-size:12px;color:#92400E;line-height:1.7;">';
+    pe+='直近の体重変動が <strong>'+range+'kg以内</strong> で推移しています。<br>';
+    pe+='停滞期は体が新しい体重に慣れようとする正常な反応です。<br>';
+    pe+='食べる量を少し変える・水分を増やす・睡眠を整えると抜けやすくなります✊';
+    pe+='</div></div>';
+    el.innerHTML=pe;
+  } else {
+    el.innerHTML='';
+  }
+}
+
+// ② 生理周期は renderMenstrualBanner / setTodayAsPeriodStart で処理
+
+// ============================================================
+// ③ 目標達成予定日
+// ============================================================
+function renderGoalEta(){
+  const el=document.getElementById('goalEta');
+  if(!el){return;}
+  if(R.length<3){el.innerHTML='';return;}
+  const sr=R.slice().sort((a,b)=>a.date.localeCompare(b.date));
+  const cur=sr[sr.length-1].weight;
+  const toGo=cur-S.target;
+  if(toGo<=0){
+    el.innerHTML='<div style="background:var(--okl);border-left:4px solid var(--ok);border-radius:9px;padding:13px 14px;margin-bottom:13px;"><div style="font-size:13px;font-weight:700;color:#166534;">🎉 目標体重を達成しています！</div><div style="font-size:12px;color:#166534;margin-top:4px;">このまま継続して維持しましょう✊</div></div>';
+    return;
+  }
+  // 直近14日の変化率で予測（データが少なければ全期間）
+  const cutDate=lds(new Date(Date.now()-14*86400000));
+  let recentRecs=sr.filter(r=>r.date>=cutDate);
+  if(recentRecs.length<2)recentRecs=sr;
+  if(recentRecs.length<2){el.innerHTML='';return;}
+  const first2=recentRecs[0],last2=recentRecs[recentRecs.length-1];
+  const daysSpan=Math.max(1,(new Date(last2.date)-new Date(first2.date))/86400000);
+  const lossPerDay=(first2.weight-last2.weight)/daysSpan;
+  if(lossPerDay<=0.002){
+    el.innerHTML='<div style="background:var(--bll);border-left:4px solid var(--bl);border-radius:9px;padding:13px 14px;margin-bottom:13px;font-size:12px;color:#1e3a5f;">📅 <strong>目標達成予定日：計算中</strong><br>直近の体重変化が停滞気味です。記録を続けると予測精度が上がります。</div>';
+    return;
+  }
+  const daysNeeded=Math.ceil(toGo/lossPerDay);
+  const eta=new Date(Date.now()+daysNeeded*86400000);
+  var etaStr=eta.getFullYear()+'年'+(eta.getMonth()+1)+'月'+eta.getDate()+'日';
+  const months=Math.floor(daysNeeded/30);
+  const days=daysNeeded%30;
+  var periodStr=months>0?('約'+months+'ヶ月'+(days>0?days+'日':'')+'後'):('約'+daysNeeded+'日後');
+  var ge='';ge+='<div style="background:var(--bll);border-left:4px solid var(--bl);border-radius:9px;padding:13px 14px;margin-bottom:13px;">'+
+    '<div style="font-size:13px;font-weight:700;color:#1e3a5f;margin-bottom:5px;">📅 目標達成予定日</div>'+
+    '<div style="font-size:22px;font-weight:700;color:#1e3a5f;margin-bottom:3px;">'+etaStr+'</div>'+
+    '<div style="font-size:12px;color:var(--bl);">'+periodStr+'（現在のペース継続の場合）</div>'+
+    '<div style="font-size:11px;color:var(--md);margin-top:5px;">残り'+toGo.toFixed(1)+'kg ／ 日'+(lossPerDay*1000).toFixed(0)+'g減ペース</div></div>';
+  el.innerHTML=ge;
+}
+
+
+function exportData(){
+  var data=JSON.stringify({s:S,r:R,m:WM},null,2);
+  var blob=new Blob([data],{type:'application/json'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;
+  a.download='kaori_bodymake_backup_'+tds()+'.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  toast('✅ データを書き出しました','ok');
+}
+
+function importData(e){
+  var file=e.target.files[0];
+  if(!file)return;
+  var reader=new FileReader();
+  reader.onload=function(ev){
+    try{
+      var d=JSON.parse(ev.target.result);
+      if(!d.s||!d.r)throw new Error('invalid');
+      S=Object.assign({},S,d.s);R=d.r||[];WM=d.m||null;
+      save();loadSUI();renderHome();renderRecord();
+      if(WM)renderMS();
+      toast('✅ データを読み込みました','ok');
+    }catch(err){
+      toast('❌ 読み込みに失敗しました','ng');
+    }
+  };
+  reader.readAsText(file);
+  e.target.value='';
+}
+
+function confirmReset(){
+  showCF('データのリセット','すべての体重記録・献立・設定データを削除します。この操作は取り消せません。','すべて削除する',()=>{
+    localStorage.removeItem('kaori_diet_app');
+    location.reload();
+  });
+}
+</script>
+
+<!-- PWA Service Worker + ホーム追加バナー -->
+<script>
+// Service Worker登録（オフライン対応・データ保持）
+if('serviceWorker' in navigator){
+  var swCode=[
+    'const CACHE="kaori-v1";',
+    'self.addEventListener("install",e=>{',
+    '  e.waitUntil(caches.open(CACHE).then(c=>c.addAll(["./"])));',
+    '});',
+    'self.addEventListener("fetch",e=>{',
+    '  e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)));',
+    '});'
+  ].join('');
+  var blob=new Blob([swCode],{type:'application/javascript'});
+  var url=URL.createObjectURL(blob);
+  navigator.serviceWorker.register(url).catch(function(){});
+}
+
+// iOSホーム追加バナー（Safari・未インストール時のみ）
+(function(){
+  var isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
+  var isStandalone=('standalone' in navigator)&&navigator.standalone;
+  var dismissed=localStorage.getItem('pwa_banner_dismissed');
+  if(isIOS&&!isStandalone&&!dismissed){
+    setTimeout(function(){
+      var b=document.createElement('div');
+      b.id='pwa-banner';
+      b.innerHTML='<div style="position:fixed;bottom:80px;left:12px;right:12px;background:#2C2418;color:#FAF7F2;border-radius:14px;padding:14px 16px;z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,.4);font-family:Noto Sans JP,sans-serif;">'
+        +'<div style="display:flex;justify-content:space-between;align-items:flex-start;">'
+        +'<div>'
+        +'<div style="font-size:13px;font-weight:700;margin-bottom:5px;">📲 ホーム画面に追加するとデータが消えません</div>'
+        +'<div style="font-size:11px;color:rgba(250,247,242,.65);line-height:1.6;">Safari下部の <strong style="color:#C4956A;">共有ボタン（□↑）</strong> をタップ<br>→「ホーム画面に追加」を選択してください</div>'
+        +'</div>'
+        +'<button onclick="document.getElementById(&quot;pwa-banner&quot;).remove();localStorage.setItem(&quot;pwa_banner_dismissed&quot;,&quot;1&quot;);" '
+        +'style="background:none;border:none;color:rgba(250,247,242,.5);font-size:20px;cursor:pointer;padding:0 0 0 12px;flex-shrink:0;">×</button>'
+        +'</div></div>';
+      document.body.appendChild(b);
+    },2000);
+  }
+})();
+</script>
+</body>
+</html>
